@@ -1,0 +1,94 @@
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definition_cf437144-54ea-11f1-9d7a-00155dc8b96b" name="DMN Loan approval eligibility" namespace="http://www.flowable.org/dmn" exporter="Flowable Open Source Modeler" exporterVersion="6.8.1">
+  <decision id="dmn_loan_approval_eligibility" name="DMN Loan approval eligibility">
+    <decisionTable id="decisionTable_47159dde-6afe-4357-8326-aa4634e82e7b" hitPolicy="FIRST">
+      <input label="Gurantor coverage">
+        <inputExpression id="inputExpression_0d4557df-d19d-498b-b519-518b96602b66" typeRef="number">
+          <text>gurantor_coverage</text>
+        </inputExpression>
+      </input>
+      <output id="outputExpression_b4d2d9b6-2e63-4906-b561-9f4091b4867c" label="Risk flag" name="riskFlag" typeRef="string">
+        <outputValues>
+          <text>""Fully secured"",""Medium risk"",""High risk"",""Very high risk""</text>
+        </outputValues>
+      </output>
+      <output id="outputExpression_f74d23b8-bf51-4ce7-a06e-735e0ae0129f" label="Eligiblity" name="is_eligible" typeRef="boolean">
+        <outputValues>
+          <text>true,false</text>
+        </outputValues>
+      </output>
+      <output id="outputExpression_2ff85c5d-10af-48de-8fbd-5bfb0621e00a" label="Decision" name="decision" typeRef="string">
+        <outputValues>
+          <text>""Approve"",""Review"",""Reject""</text>
+        </outputValues>
+      </output>
+      <output id="outputExpression_306a0085-a8ec-4dba-9414-85c919a6b2d1" label="Failure reason" name="failure_reason" typeRef="string"></output>
+      <rule>
+        <inputEntry id="inputEntry_0d4557df-d19d-498b-b519-518b96602b66_1">
+          <text><![CDATA[${gurantor_coverage < 50}]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_b4d2d9b6-2e63-4906-b561-9f4091b4867c_1">
+          <text><![CDATA["Very high risk"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_f74d23b8-bf51-4ce7-a06e-735e0ae0129f_1">
+          <text><![CDATA[false]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_2ff85c5d-10af-48de-8fbd-5bfb0621e00a_1">
+          <text><![CDATA["Reject"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_306a0085-a8ec-4dba-9414-85c919a6b2d1_1">
+          <text><![CDATA["Guarantor coverage below preferred threshold"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_0d4557df-d19d-498b-b519-518b96602b66_2">
+          <text><![CDATA[${gurantor_coverage >= 50 && gurantor_coverage   < 80 }]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_b4d2d9b6-2e63-4906-b561-9f4091b4867c_2">
+          <text><![CDATA["High risk"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_f74d23b8-bf51-4ce7-a06e-735e0ae0129f_2">
+          <text><![CDATA[false]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_2ff85c5d-10af-48de-8fbd-5bfb0621e00a_2">
+          <text><![CDATA["Reject"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_306a0085-a8ec-4dba-9414-85c919a6b2d1_2">
+          <text><![CDATA["Guarantor coverage below preferred threshold"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_0d4557df-d19d-498b-b519-518b96602b66_3">
+          <text><![CDATA[${gurantor_coverage >= 80 && gurantor_coverage   < 99 }]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_b4d2d9b6-2e63-4906-b561-9f4091b4867c_3">
+          <text><![CDATA["Medium risk"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_f74d23b8-bf51-4ce7-a06e-735e0ae0129f_3">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_2ff85c5d-10af-48de-8fbd-5bfb0621e00a_3">
+          <text><![CDATA["Review"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_306a0085-a8ec-4dba-9414-85c919a6b2d1_3">
+          <text><![CDATA["Guarantor coverage below preferred threshold"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_0d4557df-d19d-498b-b519-518b96602b66_4">
+          <text><![CDATA[${gurantor_coverage >= 99}]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_b4d2d9b6-2e63-4906-b561-9f4091b4867c_4">
+          <text><![CDATA["Fully secured"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_f74d23b8-bf51-4ce7-a06e-735e0ae0129f_4">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_2ff85c5d-10af-48de-8fbd-5bfb0621e00a_4">
+          <text><![CDATA["Approve"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_306a0085-a8ec-4dba-9414-85c919a6b2d1_4"></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI></dmndi:DMNDI>
+</definitions>

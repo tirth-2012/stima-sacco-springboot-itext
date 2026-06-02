@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="credit_memo"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555"
+              leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+
+    <!-- PARAMETERS -->
+    <parameter name="logo" class="java.lang.String"/>
+    <parameter name="borrowerName" class="java.lang.String"/>
+    <parameter name="applicationId" class="java.lang.String"/>
+    <parameter name="loanAmount" class="java.lang.Double"/>
+    <parameter name="interestRate" class="java.lang.Double"/>
+    <parameter name="tenureMonths" class="java.lang.Integer"/>
+    <parameter name="monthlyIncome" class="java.lang.Double"/>
+    <parameter name="existingEMI" class="java.lang.Double"/>
+    <parameter name="proposedEMI" class="java.lang.Double"/>
+    <parameter name="cibilScore" class="java.lang.Integer"/>
+    <parameter name="loanEligibility" class="java.lang.Double"/>
+    <parameter name="recommendation" class="java.lang.String"/>
+    <parameter name="preparedBy" class="java.lang.String"/>
+    <parameter name="preparedDate" class="java.lang.String"/>
+
+    <!-- VARIABLE -->
+    <variable name="FOIR" class="java.lang.Double">
+        <variableExpression><![CDATA[
+            ($P{existingEMI} + $P{proposedEMI}) / $P{monthlyIncome}
+        ]]></variableExpression>
+    </variable>
+
+    <!-- TITLE -->
+    <title>
+        <band height="90">
+
+            <image>
+                <reportElement x="0" y="10" width="90" height="50"/>
+                <imageExpression><![CDATA[$P{logo}]]></imageExpression>
+            </image>
+
+            <staticText>
+                <reportElement x="100" y="10" width="400" height="20"/>
+                <textElement><font size="14" isBold="true"/></textElement>
+                <text><![CDATA[DIB BANK / NBFC LTD]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="100" y="30" width="400" height="25"/>
+                <textElement><font size="16" isBold="true"/></textElement>
+                <text><![CDATA[CREDIT APPRAISAL MEMO]]></text>
+            </staticText>
+
+            <line>
+                <reportElement x="0" y="70" width="555" height="1"/>
+            </line>
+
+        </band>
+    </title>
+
+    <!-- DETAIL -->
+    <detail>
+        <band height="650">
+
+            <!-- Borrower -->
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[1. Borrower Details]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="35" width="300" height="20"/>
+                <textFieldExpression><![CDATA["Name: " + $P{borrowerName}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="300" y="35" width="255" height="20"/>
+                <textFieldExpression><![CDATA["Application ID: " + $P{applicationId}]]></textFieldExpression>
+            </textField>
+
+            <!-- Loan -->
+            <staticText>
+                <reportElement x="0" y="70" width="555" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[2. Loan Details]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="95" width="300" height="20"/>
+                <textFieldExpression><![CDATA["Loan Amount: ₹ " + $P{loanAmount}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="300" y="95" width="255" height="20"/>
+                <textFieldExpression><![CDATA["Interest Rate: " + $P{interestRate} + " %"]]></textFieldExpression>
+            </textField>
+
+            <!-- FOIR -->
+            <staticText>
+                <reportElement x="0" y="130" width="555" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[3. Financial Assessment]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="155" width="300" height="20"/>
+                <textFieldExpression><![CDATA["FOIR: " + ($V{FOIR} * 100) + " %"]]></textFieldExpression>
+            </textField>
+
+            <!-- Risk Badge -->
+            <textField>
+                <reportElement x="300" y="155" width="255" height="20"/>
+                <textFieldExpression><![CDATA[
+                    ($P{cibilScore} >= 750 ? "LOW RISK" :
+                    ($P{cibilScore} >= 650 ? "MEDIUM RISK" : "HIGH RISK"))
+                ]]></textFieldExpression>
+            </textField>
+
+            <!-- Annexure Table -->
+            <staticText>
+                <reportElement x="0" y="200" width="555" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[4. Annexure - Financial Summary]]></text>
+            </staticText>
+
+            <rectangle>
+                <reportElement x="0" y="225" width="555" height="80"/>
+            </rectangle>
+
+            <textField>
+                <reportElement x="10" y="235" width="500" height="20"/>
+                <textFieldExpression><![CDATA["Monthly Income: ₹ " + $P{monthlyIncome}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="10" y="260" width="500" height="20"/>
+                <textFieldExpression><![CDATA["Existing EMI: ₹ " + $P{existingEMI}]]></textFieldExpression>
+            </textField>
+
+            <!-- Recommendation -->
+            <staticText>
+                <reportElement x="0" y="320" width="555" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[5. Recommendation]]></text>
+            </staticText>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="345" width="555" height="60"/>
+                <textFieldExpression><![CDATA[$P{recommendation}]]></textFieldExpression>
+            </textField>
+
+            <!-- Signature -->
+            <staticText>
+                <reportElement x="0" y="420" width="300" height="20"/>
+                <text><![CDATA[Authorized Signatory]]></text>
+            </staticText>
+
+            <line>
+                <reportElement x="0" y="450" width="200" height="1"/>
+            </line>
+
+        </band>
+    </detail>
+
+    <!-- FOOTER -->
+    <pageFooter>
+        <band height="40">
+
+            <line>
+                <reportElement x="0" y="0" width="555" height="1"/>
+            </line>
+
+            <textField>
+                <reportElement x="0" y="10" width="300" height="20"/>
+                <textFieldExpression><![CDATA["Prepared By: " + $P{preparedBy}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="300" y="10" width="255" height="20"/>
+                <textFieldExpression><![CDATA["Date: " + $P{preparedDate}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+
+</jasperReport>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Completed Notification</title>
+
+  <style>
+    body {
+        background-color: #eef2f7;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 750px;
+        margin: 30px auto;
+        background: #fcfcfd;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .header {
+        background: linear-gradient(90deg, #1f2937, #374151);
+        color: #ffffff;
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .content {
+        padding: 25px;
+        font-size: 14px;
+        color: #374151;
+        line-height: 1.6;
+    }
+
+    .section-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 8px;
+        color: #111827;
+        border-left: 4px solid #2563eb;
+        padding-left: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 13px;
+    }
+
+    table td {
+        padding: 10px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    table td:first-of-type {
+        font-weight: 600;
+        color: #111827;
+        width: 40%;
+    }
+
+    .amount {
+        font-weight: 600;
+        color: #065f46;
+    }
+
+    .status {
+        margin-top: 20px;
+        padding: 10px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        border-radius: 6px;
+        display: inline-block;
+        font-weight: 600;
+    }
+
+    .footer {
+        background: #f3f4f6;
+        text-align: center;
+        font-size: 12px;
+        color: #6b7280;
+        padding: 15px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .btn-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #2563eb;
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    Task Completed
+  </div>
+
+  <div class="content">
+
+      <p>
+          Hello <strong>Sir/Madam</strong>,
+      </p>
+
+    <p>
+      The task at <strong th:text="${taskName}"></strong> stage has been completed by
+      <strong th:text="${completedBy}">User</strong>.
+    </p>
+
+    <!-- TASK INFO -->
+    <div class="section-title">Task Information</div>
+    <table>
+      <tr><td>Approval Stage</td><td th:text="${taskName}"></td></tr>
+      <tr><td>Status</td><td>COMPLETED</td></tr>
+      <tr><td>Task ID</td><td th:text="${taskId}"></td></tr>
+      <tr><td>Process Instance</td><td th:text="${processInstanceId}"></td></tr>
+    </table>
+
+    <!-- CUSTOMER INFO -->
+    <div class="section-title">Customer Information</div>
+    <table>
+      <tr><td>Full Name</td><td th:text="${fullName}"></td></tr>
+      <tr><td>CIF Number</td><td th:text="${cifNumber}"></td></tr>
+      <tr><td>Mobile Number</td><td th:text="${mobile}"></td></tr>
+    </table>
+
+    <!-- PRODUCT -->
+    <div class="section-title">Product Details</div>
+
+    <table>
+      <tr><td>Product Name</td><td th:text="${productName}"></td></tr>
+      <tr><td>Financing Amount</td><td class="amount">KSH <span th:text="${financingAmount}"></span></td></tr>
+      <tr><td>Financing Tenor</td><td th:text="${tenure}"></td></tr>
+      <tr><td>Payment Structure</td><td th:text="${paymentStructure}"></td></tr>
+      <tr><td>Sector</td><td th:text="${Sector}"></td></tr>
+      <tr><td>Sub Sector</td><td th:text="${SubSector}"></td></tr>
+      <tr><td>Category</td><td th:text="${Category}"></td></tr>
+      <tr><td>Loan purpose Description</td><td th:text="${loan_purpose_description}"></td></tr>
+      <tr><td>Grace Period (Months)</td><td th:text="${existing_monthly_obligations}"></td></tr>
+      <tr><td>Profit Rate (%)</td><td th:text="${profitRate}"></td></tr>
+      <tr><td>Profit Amount</td><td class="amount">KSH <span th:text="${profitAmount}"></span></td></tr>
+      <tr><td>Monthly Installment</td><td class="amount">KSH <span th:text="${monthlyInstallment}"></span></td></tr>
+    </table>
+
+    <!-- ================= Employment / Business Details ================= -->
+    <div class="section-title">Product Details</div>
+
+    <table>
+      <tr><td>Customer Category</td><td th:text="${customer_category}"></td></tr>
+      <tr><td>Business Sector</td><td th:text="${business_sector}"></td></tr>
+      <tr><td>Monthly Net Income (KES)</td><td class="amount">KSH <span th:text="${monthly_net_income}"></span></td></tr>
+      <tr><td>Monthly Business Revenue (KES)</td><td class="amount">KSH <span th:text="${monthly_business_revenue}"></span></td></tr>
+      <tr><td>Annual Turnover (KES)</td><td class="amount">KSH <span th:text="${annual_turnover}"></span></td></tr>
+      <tr><td>Years in Business</td><td th:text="${years_of_Business}"></td></tr>
+    </table>
+
+    <!-- ================= GUARANTEE ================= -->
+
+    <div class="section-title">Guarantor Details</div>
+
+    <div th:each="guarantor : ${guarantors}">
+
+      <table style="margin-bottom:20px;">
+
+        <tr>
+          <td>Guarantor ID</td>
+          <td th:text="${guarantor.id}"></td>
+        </tr>
+
+        <tr>
+          <td>Full Name</td>
+          <td th:text="${guarantor.fullName}"></td>
+        </tr>
+
+        <tr>
+          <td>Member Number</td>
+          <td th:text="${guarantor.memberNumber}"></td>
+        </tr>
+
+        <tr>
+          <td>Mobile Number</td>
+          <td th:text="${guarantor.mobileNumber}"></td>
+        </tr>
+
+        <tr>
+          <td>Guarantor Amount</td>
+          <td class="amount">
+            KSH <span th:text="${guarantor.guarantorAmount}"></span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Status</td>
+          <td th:text="${guarantor.status}"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- TASK ACTION DETAILS -->
+    <div class="section-title">Task Action Details</div>
+    <table>
+      <tr><td>Action</td><td th:text="${taskAction}"></td></tr>
+      <tr><td>Action By</td><td th:text="${taskActionBy}"></td></tr>
+      <tr><td>Action Reason</td><td th:text="${taskActionReason}"></td></tr>
+    </table>
+
+    <!-- ================= STATUS ================= -->
+    <div class="status">
+      Status: COMPLETED
+    </div>
+
+    <div class="btn-container">
+      <a th:href="${viewLink}" target="_blank" class="btn-primary">
+        View Task
+      </a>
+    </div>
+
+    <p style="margin-top:20px;">
+      This task has been successfully completed.
+    </p>
+
+  </div>
+
+  <div class="footer">
+    © 2026 Stima SACCO • SASRA-Regulated
+  </div>
+
+</div>
+
+</body>
+</html>

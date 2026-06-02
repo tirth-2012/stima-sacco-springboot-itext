@@ -1,0 +1,165 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: mayan_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: stima_sacco_los_mayan
+      POSTGRES_USER: sacco
+      POSTGRES_PASSWORD: mayandbpass@123
+    command:
+      - postgres
+      - -c
+      - max_connections=300
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - work_mem=16MB
+    volumes:
+      - stima_sacco_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sacco -d stima_sacco_los_mayan"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: mayan_redis
+    restart: always
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - stima_sacco_redis_data:/data
+
+  mayan:
+    image: mayanedms/mayanedms:s4.11
+    container_name: mayan_app
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8069:8000"
+
+    environment:
+      # =========================
+      # Database
+      # =========================
+      MAYAN_DATABASE_ENGINE: django.db.backends.postgresql
+      MAYAN_DATABASE_HOST: postgres
+      MAYAN_DATABASE_NAME: stima_sacco_los_mayan
+      MAYAN_DATABASE_USER: sacco
+      MAYAN_DATABASE_PASSWORD: mayandbpass@123
+
+      MAYAN_SUPERUSER_USERNAME: admin
+      MAYAN_SUPERUSER_EMAIL: sumit.vadaviya@rutu-soft.com
+      MAYAN_SUPERUSER_PASSWORD: Admin@2026
+
+      # =========================
+      # Redis / Celery
+      # =========================
+      MAYAN_REDIS_HOST: redis
+      MAYAN_CELERY_BROKER_URL: redis://redis:6379/0
+      MAYAN_CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      # =========================
+      # Security
+      # =========================
+      MAYAN_SECRET_KEY: "eSNMCKnnH5f3w6b+UsW0KlY9AZoU53fvUmFYD1WNn2s="
+      MAYAN_SETTINGS_MODULE: production_custom
+      PYTHONPATH: /custom_settings
+
+      # =========================
+      # PERFORMANCE
+      # =========================
+      MAYAN_WORKERS: 4
+
+      MAYAN_GUNICORN_TIMEOUT: 300
+      MAYAN_GUNICORN_WORKER_CLASS: gthread
+      MAYAN_GUNICORN_THREADS: 4
+
+      MAYAN_CELERY_WORKER_CONCURRENCY: 4
+
+      # =========================
+      # OCR
+      # =========================
+      MAYAN_OCR_MODE: auto
+      MAYAN_OCR_TIMEOUT: 300
+
+    volumes:
+      - stima_sacco_mayan_media:/var/lib/mayan
+      - ../mayan_settings:/custom_settings
+
+  mayan_worker:
+    image: mayanedms/mayanedms:s4.11
+    container_name: mayan_worker
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+    environment:
+      MAYAN_WORKER: "true"
+      MAYAN_SETTINGS_MODULE: production_custom
+      PYTHONPATH: /custom_settings
+
+      # =========================
+      # Database
+      # =========================
+      MAYAN_DATABASE_ENGINE: django.db.backends.postgresql
+      MAYAN_DATABASE_HOST: postgres
+      MAYAN_DATABASE_NAME: stima_sacco_los_mayan
+      MAYAN_DATABASE_USER: sacco
+      MAYAN_DATABASE_PASSWORD: mayandbpass@123
+
+      # =========================
+      # Redis / Celery
+      # =========================
+      MAYAN_REDIS_HOST: redis
+      MAYAN_CELERY_BROKER_URL: redis://redis:6379/0
+      MAYAN_CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      # =========================
+      # OCR (SAFE)
+      # =========================
+      MAYAN_OCR_MODE: auto
+      MAYAN_OCR_TIMEOUT: 120
+      MAYAN_OCR_LANGUAGE: eng
+
+      # =========================
+      # Converter (keep if needed)
+      # =========================
+      MAYAN_CONVERTER_BACKEND: mayan.apps.converter.backends.libreoffice_backend.LibreOfficeConverter
+
+      # =========================
+      # Celery Performance
+      # =========================
+      MAYAN_CELERY_WORKER_CONCURRENCY: 4
+      MAYAN_CELERY_WORKER_PREFETCH_MULTIPLIER: 4
+      MAYAN_CELERY_WORKER_MAX_TASKS_PER_CHILD: 100
+      MAYAN_CELERY_WORKER_MAX_MEMORY_PER_CHILD: 512000
+
+      # Worker Processes
+      MAYAN_WORKERS: 2
+
+    volumes:
+      - stima_sacco_mayan_media:/var/lib/mayan
+      - ../mayan_settings:/custom_settings
+
+volumes:
+  stima_sacco_postgres_data:
+  stima_sacco_redis_data:
+  stima_sacco_mayan_media:

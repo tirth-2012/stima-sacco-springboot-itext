@@ -1,0 +1,152 @@
+spring:
+  application:
+    name: springboot-flowable-service
+
+  datasource:
+    jdbc-url: ${FLOWABLE_DB_URL:jdbc:postgresql://localhost:5432/flowable}
+    username: ${DB_USER:mayan}
+    password: ${DB_PASS:mayandbpass}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # ✅ safer for production
+    show-sql: true        # ❌ disable in production
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # =========================
+  # MAIL CONFIG
+  # =========================
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:events@nlstech.co.ke}
+    password: ${MAIL_PASSWORD:ggpf ruxu hapd ahdj}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+# =========================
+# SECONDARY DATASOURCE (MAYAN DB)
+# =========================
+secondary:
+  datasource:
+    jdbc-url: ${MAYAN_DB_URL:jdbc:postgresql://localhost:5432/mayan}
+    username: ${DB_USER:mayan}
+    password: ${DB_PASS:mayandbpass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+
+# =========================
+# MAYAN API CONFIG
+# =========================
+mayan:
+  base-url: ${MAYAN_BASE_URL:http://localhost:8069/api/v4}
+  username: ${MAYAN_USERNAME:admin}
+  password: ${MAYAN_PASSWORD:AsDxDtNR22}
+  connect-timeout: 5000
+  read-timeout: 10000
+
+# =========================
+# FLOWABLE CONFIG
+# =========================
+flowable:
+  id-generator:
+    config:
+      strong-uuid: true
+
+  database-schema-update: true   # ❌ disable auto schema update in prod
+  check-process-definitions: true
+  async-executor-activate: true
+
+  process:
+    definition-location-prefix: classpath:/processes/
+
+  dmn:
+    enabled: true
+
+# =========================
+# SERVER CONFIG
+# =========================
+server:
+  port: ${SERVER_PORT:8098}
+  servlet:
+    context-path: ${CONTEXT_PATH:/flowable-service}
+
+admin:
+  email: sg.vadaviya@gmail.com
+  notification-enabled: true
+
+notification-view-link: ${NOTIFICATION_VIEW_LINK:http://localhost:5173/}
+# =========================
+# ACTUATOR (SECURED)
+# =========================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  endpoint:
+    health:
+      show-details: never
+
+# =========================
+# SWAGGER (DISABLE IN PROD)
+# =========================
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    #url: /flowable-service/v3/api-docs
+
+
+# =========================
+# LOGGING
+# =========================
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.flowable: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# =========================
+# RESILIENCE (FOR MAYAN API)
+# =========================
+resilience4j:
+  retry:
+    instances:
+      mayanService:
+        max-attempts: 3
+        wait-duration: 2s
+
+  timelimiter:
+    instances:
+      mayanService:
+        timeout-duration: 5s
+
+  circuitbreaker:
+    instances:
+      mayanService:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s

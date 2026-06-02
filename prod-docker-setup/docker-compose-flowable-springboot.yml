@@ -1,0 +1,246 @@
+#version: '3.9'
+services:
+
+  # =========================
+  # PostgreSQL
+  # =========================
+  postgres:
+    image: postgres:15-alpine
+    container_name: mayan_postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # =========================
+  # Redis
+  # =========================
+  redis:
+    image: redis:7-alpine
+    container_name: mayan_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # =========================
+  # Mayan EDMS (Web)
+  # =========================
+  mayan:
+    image: mayanedms/mayanedms:s4.11
+    container_name: mayan_app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    # ports:               # ✅ removed — nginx handles all traffic
+    #   - "8069:8000"
+    environment:
+      MAYAN_DATABASE_ENGINE: django.db.backends.postgresql
+      MAYAN_DATABASE_HOST: postgres
+      MAYAN_DATABASE_NAME: ${DB_NAME}
+      MAYAN_DATABASE_USER: ${DB_USER}
+      MAYAN_DATABASE_PASSWORD: ${DB_PASS}
+
+      MAYAN_REDIS_HOST: redis
+      MAYAN_CELERY_BROKER_URL: redis://redis:6379/0
+      MAYAN_CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      MAYAN_SECRET_KEY: ${MAYAN_SECRET_KEY}
+      #MAYAN_SETTINGS_MODULE: mayan.settings.production
+
+      MAYAN_WORKERS: 1
+      MAYAN_CELERY_WORKER_CONCURRENCY: 1
+
+      MAYAN_OCR_MODE: force
+      MAYAN_OCR_TIMEOUT: 300
+      MAYAN_OCR_LANGUAGE: eng
+
+      MAYAN_COMMON_DISABLE_LOCAL_STORAGE: "false"
+      MAYAN_SETTINGS_MODULE: mayan_settings.production_custom
+      PYTHONPATH: /opt/mayan_settings
+
+      MAYAN_DJANGO_ALLOWED_HOSTS: "*"
+      MAYAN_ALLOWED_HOSTS: "*"
+      MAYAN_USE_X_FORWARDED_HOST: "true"
+      MAYAN_SECURE_PROXY_SSL_HEADER: "HTTP_X_FORWARDED_PROTO,https"
+
+      MAYAN_DOCKER_APP_BASE_PATH: /mayan
+      FORCE_SCRIPT_NAME: /mayan
+      MAYAN_CONVERTER_BACKEND: mayan.apps.converter.backends.libreoffice_backend.LibreOfficeConverter
+
+    volumes:
+      - mayan_media:/var/lib/mayan
+      - ./mayan_settings:/opt/mayan_settings/mayan_settings
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:8000 || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  mayan_worker:
+    image: mayanedms/mayanedms:s4.11
+    container_name: mayan_worker
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      MAYAN_WORKER: "true"
+      #MAYAN_SETTINGS_MODULE: mayan.settings.production
+      MAYAN_SETTINGS_MODULE: mayan_settings.production_custom
+      PYTHONPATH: /opt/mayan_settings
+      MAYAN_DATABASE_ENGINE: django.db.backends.postgresql
+      MAYAN_DATABASE_HOST: postgres
+      MAYAN_DATABASE_NAME: ${DB_NAME}
+      MAYAN_DATABASE_USER: ${DB_USER}
+      MAYAN_DATABASE_PASSWORD: ${DB_PASS}
+
+      MAYAN_REDIS_HOST: redis
+      MAYAN_CELERY_BROKER_URL: redis://redis:6379/0
+      MAYAN_CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      MAYAN_SECRET_KEY: ${MAYAN_SECRET_KEY}   # ✅ added — required for worker
+
+      MAYAN_OCR_MODE: force
+      MAYAN_OCR_TIMEOUT: 300
+      MAYAN_OCR_LANGUAGE: eng
+
+      MAYAN_CONVERTER_BACKEND: mayan.apps.converter.backends.libreoffice_backend.LibreOfficeConverter
+
+      MAYAN_CELERY_WORKER_CONCURRENCY: 1
+      MAYAN_CELERY_WORKER_PREFETCH_MULTIPLIER: 1
+      MAYAN_CELERY_WORKER_MAX_TASKS_PER_CHILD: 100
+      MAYAN_CELERY_WORKER_MAX_MEMORY_PER_CHILD: 200000
+
+    volumes:
+      - mayan_media:/var/lib/mayan
+      - ./mayan_settings:/opt/mayan_settings/mayan_settings
+    networks:
+      - app-network
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  # =========================
+  # Flowable App
+  # =========================
+  flowable-app:
+    build: .
+    container_name: flowable_app
+    restart: unless-stopped
+    environment:
+      FLOWABLE_DATABASE_SCHEMA_UPDATE: "true"
+      SPRING_PROFILES_ACTIVE: prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mayan:
+        condition: service_started
+    env_file:
+      - .env
+    ports:
+      - "${SERVER_PORT}:8098"
+    networks:
+      - app-network
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  react-ui:
+    build:
+      context: ../NLSTechReactUI
+    container_name: react_ui_build
+    command: >
+      sh -c "cp -r /output/* /shared && echo 'React build copied' && tail -f /dev/null"
+    volumes:
+      - react_build:/shared
+    networks:
+      - app-network
+
+  # =========================
+  # NGINX (Reverse Proxy)
+  # =========================
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+      - react_build:/usr/share/nginx/html
+    depends_on:
+      - mayan
+      - flowable-app
+      - react-ui
+    networks:
+      - app-network
+
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    volumes:
+#      - certbot_www:/var/www/certbot
+#      - certbot_conf:/etc/letsencrypt
+
+# =========================
+# Volumes
+# =========================
+volumes:
+  postgres_data:
+  redis_data:
+  mayan_media:
+  react_build:
+  certbot_www:
+  certbot_conf:
+
+# =========================
+# Network
+# =========================
+networks:
+  app-network:
+    driver: bridge

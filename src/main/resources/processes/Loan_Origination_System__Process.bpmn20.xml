@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler" exporterVersion="6.8.1">
+  <message id="message_wait_guarantor_approval" name="message_wait_guarantor_approval"></message>
+  <process id="loan_origination_system_process" name="Loan Origination System  Process" isExecutable="true">
+    <extensionElements>
+      <flowable:executionListener event="start" expression="${processIslamicFinancialNotificationService.sendRequestInitiatedNotification(execution)}"></flowable:executionListener>
+      <flowable:executionListener event="end" expression="${processIslamicFinancialNotificationService.sendRequestCompletedNotification(execution)}"></flowable:executionListener>
+      <flowable:executionListener event="start" expression="${auditListenerService.persistProcessAudit(execution)}"></flowable:executionListener>
+      <flowable:executionListener event="end" expression="${auditListenerService.persistProcessAudit(execution)}"></flowable:executionListener>
+    </extensionElements>
+    <dataObject id="action" name="action" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value>""</flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_eligibility_check_action_by" name="usertask_eligibility_check_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_guarantor_verification_action_by" name="usertask_guarantor_verification_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_risk_credit_analyst_action_by" name="usertask_conventional_risk_credit_analyst_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_branch_manager_action_by" name="usertask_conventional_branch_manager_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_credit_officer_action_by" name="usertask_conventional_credit_officer_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_senior_credit_manager_action_by" name="usertask_conventional_senior_credit_manager_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_credit_committe_action_by" name="usertask_conventional_credit_committe_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_branch_credit_committe_action_by" name="usertask_conventional_branch_credit_committe_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_legal_verification_action_by" name="usertask_conventional_legal_verification_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="usertask_conventional_financial_processing_action_by" name="usertask_conventional_financial_processing_action_by" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value></flowable:value>
+      </extensionElements>
+    </dataObject>
+    <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="usertask_eligibility_check" name="Eligibility Check" flowable:assignee="${usertask_eligibility_check_action_by}" flowable:candidateGroups="BRANCH_MANAGER" flowable:dueDate="PT1H" flowable:formFieldValidation="true">
+      <documentation>Review the submitted case at branch level.</documentation>
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_risk_credit_analyst" name="Credit Appraisal" flowable:assignee="${usertask_conventional_risk_credit_analyst_action_by}" flowable:candidateGroups="CREDIT_APRAISAL" flowable:dueDate="PT48H" flowable:formFieldValidation="true">
+      <documentation>Perform credit and risk evaluation.</documentation>
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_legal_verification" name="Documentation" flowable:assignee="${usertask_conventional_legal_verification_action_by}" flowable:candidateGroups="LEGAL_OFFICER" flowable:dueDate="PT5H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_disbursement" name="Disbursement Preparation" flowable:assignee="${usertask_conventional_financial_processing_action_by}" flowable:candidateGroups="CREDIT_ADMINISTRATOR" flowable:dueDate="PT4H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-11CC245B-A38A-4A57-BB10-CC52AFADDC29" sourceRef="usertask_conventional_legal_verification" targetRef="servicetask_generate_legal_memo"></sequenceFlow>
+    <sequenceFlow id="sid-35057B75-E8B9-42EB-ACF1-A8D1BDB19FDA" sourceRef="usertask_conventional_disbursement" targetRef="servicetask_cbs_handoff"></sequenceFlow>
+    <endEvent id="sid-ED75BBC6-E94A-4959-9300-F8A50F45CA2B"></endEvent>
+    <sequenceFlow id="sid-4F71662A-EEEE-4D7C-972B-16B2A607B74A" sourceRef="servicetask_cbs_handoff" targetRef="sid-ED75BBC6-E94A-4959-9300-F8A50F45CA2B"></sequenceFlow>
+    <serviceTask id="servicetask_send_SLA_violation_notification" name="Send SLA Violation notification" flowable:expression="#{processIslamicFinancialNotificationService.slaViolationNotification(execution)}"></serviceTask>
+    <endEvent id="sid-ACC86CDF-2383-478B-86FF-841BDA498C7B"></endEvent>
+    <sequenceFlow id="sid-9E7B9427-253B-4D48-89C4-4A6AA9BD6B53" sourceRef="servicetask_send_SLA_violation_notification" targetRef="sid-ACC86CDF-2383-478B-86FF-841BDA498C7B"></sequenceFlow>
+    <boundaryEvent id="sid-1E9DCD5B-D696-4812-AB9C-AFC12CF9E062" attachedToRef="usertask_eligibility_check" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/PT10M</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <userTask id="usertask_member" name="Member" flowable:assignee="${requester}" flowable:dueDate="PT1H" flowable:formFieldValidation="true">
+      <documentation>Review the submitted case at branch level.</documentation>
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <serviceTask id="servicetask_fetch_credit_score" name="Fetch Credit Score" flowable:expression="${creditAssessmentServiceImpl.generateCreditAssessment(execution)}"></serviceTask>
+    <sequenceFlow id="sid-464EBA15-6003-4CFA-897E-5FCA4465F18C" sourceRef="servicetask_fetch_credit_score" targetRef="usertask_conventional_risk_credit_analyst"></sequenceFlow>
+    <serviceTask id="sid-BC86EE27-41D1-4A18-8C82-0D51AC01B483" name="Fetch approvers" flowable:type="dmn">
+      <extensionElements>
+        <flowable:field name="decisionTableReferenceKey">
+          <flowable:string><![CDATA[dmn_approver_authorities_stima_sacco]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="decisionTaskThrowErrorOnNoHits">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="fallbackToDefaultTenant">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="sameDeployment">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:decisionReferenceType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[decisionService]]></flowable:decisionReferenceType>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-4189BFCC-2F2D-44E5-8AA7-933EAD69A27D" sourceRef="sid-BC86EE27-41D1-4A18-8C82-0D51AC01B483" targetRef="sid-25F60605-4746-491D-A9B9-A1E14DB960CB"></sequenceFlow>
+    <inclusiveGateway id="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" name="threshhold?"></inclusiveGateway>
+    <userTask id="usertask_conventional_credit_officer" name="Credit Officer Approval" flowable:assignee="${usertask_conventional_credit_officer_action_by}" flowable:candidateGroups="CREDIT_OFFICER" flowable:dueDate="PT72H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_senior_credit_manager" name="Senior Credit Manager Approval" flowable:assignee="${usertask_conventional_senior_credit_manager_action_by}" flowable:candidateGroups="SENIOR_CREDIT_MANAGER" flowable:dueDate="PT72H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_credit_committe" name="Credit Committee Approval" flowable:assignee="${usertask_conventional_credit_committe_action_by}" flowable:candidateGroups="CREDIT_COMMITTEE" flowable:dueDate="PT72H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask_conventional_branch_credit_committe" name="Branch Credit Committee Approval" flowable:assignee="${usertask_conventional_branch_credit_committe_action_by}" flowable:candidateGroups="BRANCH_CREDIT_COMMITTEE" flowable:dueDate="PT72H" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <inclusiveGateway id="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86"></inclusiveGateway>
+    <sequenceFlow id="sid-377600C2-E091-4BE6-BB49-6F45C1551308" sourceRef="usertask_conventional_credit_officer" targetRef="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86"></sequenceFlow>
+    <sequenceFlow id="sid-8F446CD2-D8AE-4EEC-87DE-0876F4AD9F9C" sourceRef="usertask_conventional_senior_credit_manager" targetRef="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86"></sequenceFlow>
+    <sequenceFlow id="sid-25E41BAB-F5E8-4C75-BA81-A3E03BACB937" sourceRef="usertask_conventional_credit_committe" targetRef="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86"></sequenceFlow>
+    <sequenceFlow id="sid-B0342CCB-9C30-4F69-BD34-A66D044B2C81" sourceRef="usertask_conventional_branch_credit_committe" targetRef="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86"></sequenceFlow>
+    <sequenceFlow id="sid-87C448BB-962B-4B7A-902C-384DEA0421CF" sourceRef="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86" targetRef="servicetask_generate_offer_letter"></sequenceFlow>
+    <serviceTask id="servicetask_generate_offer_letter" name="Generate Offer Letter" flowable:expression="${offerLetterServiceImpl.generateAndUploadOfferLetter(execution)}"></serviceTask>
+    <sequenceFlow id="sid-BCE8B185-0722-42D3-95D5-8BAAFD8CC0CF" sourceRef="servicetask_generate_offer_letter" targetRef="servicetask_facility_aggreement"></sequenceFlow>
+    <serviceTask id="servicetask_generate_rca_memo" name="Generate RCA Memo" flowable:expression="${memoServiceImpl.generateAndUploadRCAMemo(execution)}"></serviceTask>
+    <sequenceFlow id="sid-DBCE656A-77EA-4DD2-BDC3-F9C0FC9D52A7" sourceRef="servicetask_generate_rca_memo" targetRef="usertask_conventional_branch_manager"></sequenceFlow>
+    <serviceTask id="servicetask_generate_legal_memo" name="Generate Legal Memo" flowable:expression="${memoServiceImpl.generateAndUploadLegalMemo(execution)}"></serviceTask>
+    <sequenceFlow id="sid-89C18665-C3AD-479C-B10E-9CC4B3F614F7" sourceRef="servicetask_generate_legal_memo" targetRef="usertask_conventional_disbursement"></sequenceFlow>
+    <serviceTask id="servicetask_facility_aggreement" name="Generate Facility Agreement" flowable:expression="${agreementServiceImpl.generateAndUploadFacilityAgreement(execution)}"></serviceTask>
+    <sequenceFlow id="sid-1EBFEAB9-E22A-4387-9F77-87FC516C1F15" sourceRef="servicetask_facility_aggreement" targetRef="usertask_conventional_legal_verification"></sequenceFlow>
+    <serviceTask id="servicetask_guarantor_approval_notification" name="Guarantor Approval Notification" flowable:async="true" flowable:expression="${processIslamicFinancialNotificationService.sendGuarantorApprovalNotification(execution)}"></serviceTask>
+    <sequenceFlow id="sid-E8271E14-E710-4712-83D2-0ED6B486D48E" sourceRef="sid-1E9DCD5B-D696-4812-AB9C-AFC12CF9E062" targetRef="servicetask_send_SLA_violation_notification"></sequenceFlow>
+    <intermediateCatchEvent id="message_guarantor_response" name="Wait For Guarantor Response">
+      <messageEventDefinition messageRef="message_wait_guarantor_approval"></messageEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sid-F71D3974-A0D2-4128-BC2D-5232BF3C2FBF" sourceRef="servicetask_guarantor_approval_notification" targetRef="message_guarantor_response"></sequenceFlow>
+    <sequenceFlow id="sid-ACF180F0-D4AC-4F4E-87CA-9FF30ACA5CDC" sourceRef="usertask_eligibility_check" targetRef="servicetask_guarantor_approval_notification"></sequenceFlow>
+    <userTask id="usertask_conventional_branch_manager" name="Branch Review" flowable:assignee="${usertask_conventional_branch_manager_action_by}" flowable:candidateGroups="BRANCH_MANAGER" flowable:dueDate="PT48H" flowable:formFieldValidation="true">
+      <documentation>Perform credit and risk evaluation.</documentation>
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-C8D34B4B-4D51-44C1-9985-E8CA7C6EB0AE" sourceRef="usertask_conventional_risk_credit_analyst" targetRef="servicetask_generate_rca_memo"></sequenceFlow>
+    <sequenceFlow id="sid-8F36396B-A042-442B-9195-82AD42B49774" sourceRef="usertask_conventional_branch_manager" targetRef="sid-BC86EE27-41D1-4A18-8C82-0D51AC01B483"></sequenceFlow>
+    <serviceTask id="servicetask_cbs_handoff" name="CBS Handoff " flowable:expression="${offerLetterServiceImpl.generateAndUploadOfferLetter(execution)}"></serviceTask>
+    <exclusiveGateway id="sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592" default="sid-E55AB502-2406-4D8D-B98F-A6F4C0F5BB4D"></exclusiveGateway>
+    <sequenceFlow id="sid-6533029F-BBBF-45FD-A1BF-1424AD4C0FDB" sourceRef="startEvent1" targetRef="sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592"></sequenceFlow>
+    <sequenceFlow id="sid-E55AB502-2406-4D8D-B98F-A6F4C0F5BB4D" sourceRef="sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592" targetRef="usertask_eligibility_check"></sequenceFlow>
+    <sequenceFlow id="sid-677B0CB6-4E30-4D7D-9CA9-009C5404AB80" sourceRef="sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592" targetRef="usertask_member">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-93ECAD84-20B9-438E-A98A-261C98D30191" sourceRef="usertask_member" targetRef="usertask_eligibility_check"></sequenceFlow>
+    <userTask id="usertask_guarantor_verification" name="Guarantor Verification" flowable:assignee="${usertask_guarantor_verification_action_by}" flowable:candidateGroups="GUARANTOR_VERIFICARION_OFFICER" flowable:dueDate="PT1H" flowable:formFieldValidation="true">
+      <documentation>Review the submitted case at branch level.</documentation>
+      <extensionElements>
+        <flowable:executionListener event="start" expression="${workflowStageUpdateListener.updateCurrentStage(execution)}"></flowable:executionListener>
+        <flowable:taskListener event="create" expression="${tasksIslamicFinancialNotificationService.sendTaskCreatedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${tasksIslamicFinancialNotificationService.sendTaskClaimedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${tasksIslamicFinancialNotificationService.sendTaskCompletedNotification(task)}"></flowable:taskListener>
+        <flowable:taskListener event="create" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="assignment" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="complete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <flowable:taskListener event="delete" expression="${auditListenerService.persistTaskAudit(task)}"></flowable:taskListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-BA9B3861-1823-456C-87B1-49B75D7CFA2C" sourceRef="usertask_guarantor_verification" targetRef="servicetask_fetch_credit_score"></sequenceFlow>
+    <sequenceFlow id="sid-34A2E53E-8FD3-4EB3-B0C8-94B26500C0AD" sourceRef="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" targetRef="usertask_conventional_credit_officer">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${dmn_approver_authorities_stima_sacco.toString().contains('CREDIT_OFFICER')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-4FF0BF22-B491-42CE-9BF7-445AB0FB9AF6" sourceRef="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" targetRef="usertask_conventional_senior_credit_manager">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${dmn_approver_authorities_stima_sacco.toString().contains('SENIOR_CREDIT_MANAGER')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-F15909AA-6931-4A86-BD6A-36E21A33CC28" sourceRef="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" targetRef="usertask_conventional_credit_committe">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${dmn_approver_authorities_stima_sacco.toString().contains('CREDIT_COMMITTEE')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-F0EFA827-C0B3-45A0-91B0-DD7D6ACE76B6" sourceRef="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" targetRef="usertask_conventional_branch_credit_committe">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${dmn_approver_authorities_stima_sacco.toString().contains('BRANCH_CREDIT_COMMITTEE')}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="sid-1377551B-58A0-479C-B01E-8B1D094117A7"></exclusiveGateway>
+    <sequenceFlow id="sid-A85334C7-ECC3-40CF-BBB8-E4FA0FA959F5" sourceRef="message_guarantor_response" targetRef="sid-1377551B-58A0-479C-B01E-8B1D094117A7"></sequenceFlow>
+    <sequenceFlow id="sid-4484BB9A-7513-496E-8F3B-426491C0DA87" sourceRef="sid-1377551B-58A0-479C-B01E-8B1D094117A7" targetRef="usertask_guarantor_verification">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!skipGuarantorVerification}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-999A2D14-AB1A-460A-95D5-9E06374CE23D" sourceRef="sid-1377551B-58A0-479C-B01E-8B1D094117A7" targetRef="servicetask_fetch_credit_score">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${skipGuarantorVerification}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_loan_origination_system_process">
+    <bpmndi:BPMNPlane bpmnElement="loan_origination_system_process" id="BPMNPlane_loan_origination_system_process">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="74.99999608844539" y="259.99989555034927"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_eligibility_check" id="BPMNShape_usertask_eligibility_check">
+        <omgdc:Bounds height="80.0" width="100.00000000000006" x="344.9999820068488" y="234.9999192804334"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_risk_credit_analyst" id="BPMNShape_usertask_conventional_risk_credit_analyst">
+        <omgdc:Bounds height="79.99999999999991" width="100.0" x="1184.999991171062" y="234.99995806068816"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_legal_verification" id="BPMNShape_usertask_conventional_legal_verification">
+        <omgdc:Bounds height="80.00000000000003" width="100.0" x="2759.9999588727956" y="233.99995699525297"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_disbursement" id="BPMNShape_usertask_conventional_disbursement">
+        <omgdc:Bounds height="80.0" width="100.0" x="3119.9999535083775" y="233.99995350838196"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-ED75BBC6-E94A-4959-9300-F8A50F45CA2B" id="BPMNShape_sid-ED75BBC6-E94A-4959-9300-F8A50F45CA2B">
+        <omgdc:Bounds height="28.0" width="28.0" x="3464.9999741837382" y="259.99994982779594"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_send_SLA_violation_notification" id="BPMNShape_servicetask_send_SLA_violation_notification">
+        <omgdc:Bounds height="80.0" width="100.0" x="494.9999741837396" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-ACC86CDF-2383-478B-86FF-841BDA498C7B" id="BPMNShape_sid-ACC86CDF-2383-478B-86FF-841BDA498C7B">
+        <omgdc:Bounds height="27.999999999999986" width="28.0" x="839.9999561905884" y="125.9999986439944"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-1E9DCD5B-D696-4812-AB9C-AFC12CF9E062" id="BPMNShape_sid-1E9DCD5B-D696-4812-AB9C-AFC12CF9E062">
+        <omgdc:Bounds height="31.0" width="31.0" x="383.4999820068488" y="218.4999192804334"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_member" id="BPMNShape_usertask_member">
+        <omgdc:Bounds height="80.0" width="100.0" x="145.9999516457366" y="384.99997027218575"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_fetch_credit_score" id="BPMNShape_servicetask_fetch_credit_score">
+        <omgdc:Bounds height="80.00000000000009" width="100.0" x="1019.9999924004078" y="233.99996745586654"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BC86EE27-41D1-4A18-8C82-0D51AC01B483" id="BPMNShape_sid-BC86EE27-41D1-4A18-8C82-0D51AC01B483">
+        <omgdc:Bounds height="79.99999999999997" width="100.0" x="1679.9999749660494" y="233.9999622255597"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-25F60605-4746-491D-A9B9-A1E14DB960CB" id="BPMNShape_sid-25F60605-4746-491D-A9B9-A1E14DB960CB">
+        <omgdc:Bounds height="39.99999999999997" width="40.0" x="1889.9999859184027" y="254.9999579116765"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_credit_officer" id="BPMNShape_usertask_conventional_credit_officer">
+        <omgdc:Bounds height="80.00000000000003" width="100.0" x="2054.999984689057" y="129.9999985843897"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_senior_credit_manager" id="BPMNShape_usertask_conventional_senior_credit_manager">
+        <omgdc:Bounds height="80.0" width="100.0" x="2054.999969378114" y="233.9999604821241"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_credit_committe" id="BPMNShape_usertask_conventional_credit_committe">
+        <omgdc:Bounds height="80.00000000000006" width="100.0" x="2054.999969378114" y="339.99999031424545"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_branch_credit_committe" id="BPMNShape_usertask_conventional_branch_credit_committe">
+        <omgdc:Bounds height="80.00000000000011" width="100.0" x="2054.9999540671715" y="459.9999804794795"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86" id="BPMNShape_sid-DC08CE3F-A4FD-44A8-9549-75FA9D923C86">
+        <omgdc:Bounds height="40.0" width="40.0" x="2264.999983124435" y="254.99995616079042"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_generate_offer_letter" id="BPMNShape_servicetask_generate_offer_letter">
+        <omgdc:Bounds height="80.0" width="100.0" x="2384.9999822303653" y="234.99995630980197"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_generate_rca_memo" id="BPMNShape_servicetask_generate_rca_memo">
+        <omgdc:Bounds height="80.0" width="100.0" x="1334.999990053475" y="233.99996571243094"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_generate_legal_memo" id="BPMNShape_servicetask_generate_legal_memo">
+        <omgdc:Bounds height="79.99999999999997" width="100.0" x="2939.999978095293" y="233.9999552518175"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_facility_aggreement" id="BPMNShape_servicetask_facility_aggreement">
+        <omgdc:Bounds height="79.99999999999997" width="100.0" x="2579.999980777502" y="233.99995873868855"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_guarantor_approval_notification" id="BPMNShape_servicetask_guarantor_approval_notification">
+        <omgdc:Bounds height="80.0" width="100.0" x="510.0" y="234.99991223963934"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="message_guarantor_response" id="BPMNShape_message_guarantor_response">
+        <omgdc:Bounds height="30.0" width="30.0" x="690.0" y="259.9999038949941"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_conventional_branch_manager" id="BPMNShape_usertask_conventional_branch_manager">
+        <omgdc:Bounds height="79.99999999999994" width="100.0" x="1499.999988824129" y="233.99996396899536"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask_cbs_handoff" id="BPMNShape_servicetask_cbs_handoff">
+        <omgdc:Bounds height="80.0" width="100.0" x="3284.999951049686" y="233.9999517649465"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592" id="BPMNShape_sid-F435CBCE-70E9-4C73-89F5-2B5CC8A2D592">
+        <omgdc:Bounds height="40.00000000000003" width="40.0" x="175.99995926022743" y="253.99998329579918"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask_guarantor_verification" id="BPMNShape_usertask_guarantor_verification">
+        <omgdc:Bounds height="80.0" width="100.0" x="885.0" y="233.99995873868852"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-1377551B-58A0-479C-B01E-8B1D094117A7" id="BPMNShape_sid-1377551B-58A0-479C-B01E-8B1D094117A7">
+        <omgdc:Bounds height="40.0" width="40.0" x="780.0" y="253.99994982779594"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-BCE8B185-0722-42D3-95D5-8BAAFD8CC0CF" id="BPMNEdge_sid-BCE8B185-0722-42D3-95D5-8BAAFD8CC0CF" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="39.999999999999986">
+        <omgdi:waypoint x="2484.9499822303587" y="274.74354667427275"></omgdi:waypoint>
+        <omgdi:waypoint x="2579.9999807775002" y="274.25611196458226"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-E8271E14-E710-4712-83D2-0ED6B486D48E" id="BPMNEdge_sid-E8271E14-E710-4712-83D2-0ED6B486D48E" flowable:sourceDockerX="15.5" flowable:sourceDockerY="15.5" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="398.8349870322321" y="218.50069560642874"></omgdi:waypoint>
+        <omgdi:waypoint x="398.0" y="140.0"></omgdi:waypoint>
+        <omgdi:waypoint x="494.9999741837396" y="140.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-34A2E53E-8FD3-4EB3-B0C8-94B26500C0AD" id="BPMNEdge_sid-34A2E53E-8FD3-4EB3-B0C8-94B26500C0AD" flowable:sourceDockerX="20.0" flowable:sourceDockerY="19.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.000000000000014">
+        <omgdi:waypoint x="1909.8130725645058" y="255.17769157258707"></omgdi:waypoint>
+        <omgdi:waypoint x="1909.0" y="169.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2054.9999846890532" y="169.74489688477064"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4F71662A-EEEE-4D7C-972B-16B2A607B74A" id="BPMNEdge_sid-4F71662A-EEEE-4D7C-972B-16B2A607B74A" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="3384.949951049686" y="273.99995109232486"></omgdi:waypoint>
+        <omgdi:waypoint x="3464.999972814909" y="273.9999500154574"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-E55AB502-2406-4D8D-B98F-A6F4C0F5BB4D" id="BPMNEdge_sid-E55AB502-2406-4D8D-B98F-A6F4C0F5BB4D" flowable:sourceDockerX="20.0" flowable:sourceDockerY="20.000000000000014" flowable:targetDockerX="50.00000000000003" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="215.84528046355865" y="274.09972693084796"></omgdi:waypoint>
+        <omgdi:waypoint x="344.9999820068447" y="274.74867911200704"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8F446CD2-D8AE-4EEC-87DE-0876F4AD9F9C" id="BPMNEdge_sid-8F446CD2-D8AE-4EEC-87DE-0876F4AD9F9C" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="20.0" flowable:targetDockerY="20.0">
+        <omgdi:waypoint x="2154.9499693781145" y="274.27745926176186"></omgdi:waypoint>
+        <omgdi:waypoint x="2265.0665204631587" y="274.88945940647056"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F71D3974-A0D2-4128-BC2D-5232BF3C2FBF" id="BPMNEdge_sid-F71D3974-A0D2-4128-BC2D-5232BF3C2FBF" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="15.0" flowable:targetDockerY="15.0">
+        <omgdi:waypoint x="609.9499998814719" y="274.99990936217546"></omgdi:waypoint>
+        <omgdi:waypoint x="690.0" y="274.99990475535583"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-677B0CB6-4E30-4D7D-9CA9-009C5404AB80" id="BPMNEdge_sid-677B0CB6-4E30-4D7D-9CA9-009C5404AB80" flowable:sourceDockerX="20.0" flowable:sourceDockerY="20.000000000000014" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="195.99995825168557" y="293.9433827119002"></omgdi:waypoint>
+        <omgdi:waypoint x="195.99995366029907" y="384.99997027218575"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F15909AA-6931-4A86-BD6A-36E21A33CC28" id="BPMNEdge_sid-F15909AA-6931-4A86-BD6A-36E21A33CC28" flowable:sourceDockerX="20.0" flowable:sourceDockerY="19.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000003">
+        <omgdi:waypoint x="1909.8095124609406" y="294.7599606378581"></omgdi:waypoint>
+        <omgdi:waypoint x="1909.0" y="379.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2054.9999693781047" y="379.7448907044296"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-35057B75-E8B9-42EB-ACF1-A8D1BDB19FDA" id="BPMNEdge_sid-35057B75-E8B9-42EB-ACF1-A8D1BDB19FDA" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="3219.9499525048604" y="273.99995298006814"></omgdi:waypoint>
+        <omgdi:waypoint x="3284.999951049686" y="273.99995229273196"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-464EBA15-6003-4CFA-897E-5FCA4465F18C" id="BPMNEdge_sid-464EBA15-6003-4CFA-897E-5FCA4465F18C" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.00000000000004" flowable:targetDockerX="50.0" flowable:targetDockerY="39.99999999999996">
+        <omgdi:waypoint x="1119.949992400407" y="274.30269188667256"></omgdi:waypoint>
+        <omgdi:waypoint x="1184.9999911710586" y="274.6969306024239"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A85334C7-ECC3-40CF-BBB8-E4FA0FA959F5" id="BPMNEdge_sid-A85334C7-ECC3-40CF-BBB8-E4FA0FA959F5" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="20.0" flowable:targetDockerY="20.0">
+        <omgdi:waypoint x="719.9491889498807" y="274.84202497622647"></omgdi:waypoint>
+        <omgdi:waypoint x="780.2083238636756" y="274.20775288181244"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C8D34B4B-4D51-44C1-9985-E8CA7C6EB0AE" id="BPMNEdge_sid-C8D34B4B-4D51-44C1-9985-E8CA7C6EB0AE" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.99999999999996" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="1284.949991171061" y="274.6666272754522"></omgdi:waypoint>
+        <omgdi:waypoint x="1334.9999900534685" y="274.3329631668816"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-ACF180F0-D4AC-4F4E-87CA-9FF30ACA5CDC" id="BPMNEdge_sid-ACF180F0-D4AC-4F4E-87CA-9FF30ACA5CDC" flowable:sourceDockerX="50.00000000000003" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="444.9499820066934" y="274.9999171468597"></omgdi:waypoint>
+        <omgdi:waypoint x="509.99999987600006" y="274.9999143710795"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-11CC245B-A38A-4A57-BB10-CC52AFADDC29" id="BPMNEdge_sid-11CC245B-A38A-4A57-BB10-CC52AFADDC29" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.000000000000014" flowable:targetDockerX="50.0" flowable:targetDockerY="39.999999999999986">
+        <omgdi:waypoint x="2859.949958872796" y="273.9999565109654"></omgdi:waypoint>
+        <omgdi:waypoint x="2939.9999780952785" y="273.9999557356208"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-377600C2-E091-4BE6-BB49-6F45C1551308" id="BPMNEdge_sid-377600C2-E091-4BE6-BB49-6F45C1551308" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.000000000000014" flowable:targetDockerX="20.0" flowable:targetDockerY="20.0">
+        <omgdi:waypoint x="2154.9499846890567" y="169.7206693947657"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.0" y="169.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.813070284836" y="255.14701192890738"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-1EBFEAB9-E22A-4387-9F77-87FC516C1F15" id="BPMNEdge_sid-1EBFEAB9-E22A-4387-9F77-87FC516C1F15" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.000000000000014">
+        <omgdi:waypoint x="2679.9499807775023" y="273.99995825440084"></omgdi:waypoint>
+        <omgdi:waypoint x="2759.9999551761607" y="273.99995747905643"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F0EFA827-C0B3-45A0-91B0-DD7D6ACE76B6" id="BPMNEdge_sid-F0EFA827-C0B3-45A0-91B0-DD7D6ACE76B6" flowable:sourceDockerX="20.0" flowable:sourceDockerY="19.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000006">
+        <omgdi:waypoint x="1909.9110982922755" y="294.86129250461465"></omgdi:waypoint>
+        <omgdi:waypoint x="1909.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2054.9999540671706" y="499.74488335860553"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4484BB9A-7513-496E-8F3B-426491C0DA87" id="BPMNEdge_sid-4484BB9A-7513-496E-8F3B-426491C0DA87" flowable:sourceDockerX="20.0" flowable:sourceDockerY="20.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="819.9426152646696" y="273.9999511446277"></omgdi:waypoint>
+        <omgdi:waypoint x="884.9999988198676" y="273.99995543835786"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4189BFCC-2F2D-44E5-8AA7-933EAD69A27D" id="BPMNEdge_sid-4189BFCC-2F2D-44E5-8AA7-933EAD69A27D" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.999999999999986" flowable:targetDockerX="20.0" flowable:targetDockerY="19.999999999999986">
+        <omgdi:waypoint x="1779.949974966046" y="274.27746101157226"></omgdi:waypoint>
+        <omgdi:waypoint x="1890.066523259741" y="274.8894611548322"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4FF0BF22-B491-42CE-9BF7-445AB0FB9AF6" id="BPMNEdge_sid-4FF0BF22-B491-42CE-9BF7-445AB0FB9AF6" flowable:sourceDockerX="20.0" flowable:sourceDockerY="19.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="1929.8482004558273" y="274.8979173476911"></omgdi:waypoint>
+        <omgdi:waypoint x="2054.999969378107" y="274.2561136915753"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9E7B9427-253B-4D48-89C4-4A6AA9BD6B53" id="BPMNEdge_sid-9E7B9427-253B-4D48-89C4-4A6AA9BD6B53" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="13.999999999999993">
+        <omgdi:waypoint x="594.9499741837396" y="139.9999997805816"></omgdi:waypoint>
+        <omgdi:waypoint x="839.9999534845531" y="139.99999870521214"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-B0342CCB-9C30-4F69-BD34-A66D044B2C81" id="BPMNEdge_sid-B0342CCB-9C30-4F69-BD34-A66D044B2C81" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.00000000000006" flowable:targetDockerX="20.0" flowable:targetDockerY="20.0">
+        <omgdi:waypoint x="2154.949954067172" y="499.7206563948772"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.9110957462485" y="294.8612910010493"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-25E41BAB-F5E8-4C75-BA81-A3E03BACB937" id="BPMNEdge_sid-25E41BAB-F5E8-4C75-BA81-A3E03BACB937" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.00000000000003" flowable:targetDockerX="20.0" flowable:targetDockerY="20.0">
+        <omgdi:waypoint x="2154.949969378107" y="379.7206634586099"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.0" y="379.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2284.809510197265" y="294.7599594159382"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-89C18665-C3AD-479C-B10E-9CC4B3F614F7" id="BPMNEdge_sid-89C18665-C3AD-479C-B10E-9CC4B3F614F7" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.999999999999986" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="3039.9499780952933" y="273.9999547675298"></omgdi:waypoint>
+        <omgdi:waypoint x="3119.9999535083775" y="273.9999539921854"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-999A2D14-AB1A-460A-95D5-9E06374CE23D" id="BPMNEdge_sid-999A2D14-AB1A-460A-95D5-9E06374CE23D" flowable:sourceDockerX="20.0" flowable:sourceDockerY="20.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000004">
+        <omgdi:waypoint x="800.0" y="293.94054832423035"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1074.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1071.507541971557" y="313.9499674558666"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6533029F-BBBF-45FD-A1BF-1424AD4C0FDB" id="BPMNEdge_sid-6533029F-BBBF-45FD-A1BF-1424AD4C0FDB" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="20.0" flowable:targetDockerY="20.000000000000014">
+        <omgdi:waypoint x="104.9493447779602" y="274.8584046484842"></omgdi:waypoint>
+        <omgdi:waypoint x="176.18685896465269" y="274.186415750966"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-DBCE656A-77EA-4DD2-BDC3-F9C0FC9D52A7" id="BPMNEdge_sid-DBCE656A-77EA-4DD2-BDC3-F9C0FC9D52A7" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="39.99999999999997">
+        <omgdi:waypoint x="1434.949989916069" y="273.9999651841171"></omgdi:waypoint>
+        <omgdi:waypoint x="1499.999988824129" y="273.9999644967809"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-BA9B3861-1823-456C-87B1-49B75D7CFA2C" id="BPMNEdge_sid-BA9B3861-1823-456C-87B1-49B75D7CFA2C" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000004">
+        <omgdi:waypoint x="984.9499999999043" y="273.9999619640446"></omgdi:waypoint>
+        <omgdi:waypoint x="1019.9999924004078" y="273.99996422728196"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-87C448BB-962B-4B7A-902C-384DEA0421CF" id="BPMNEdge_sid-87C448BB-962B-4B7A-902C-384DEA0421CF" flowable:sourceDockerX="20.0" flowable:sourceDockerY="20.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="2304.9433375349768" y="274.99995618060893"></omgdi:waypoint>
+        <omgdi:waypoint x="2384.9999822303653" y="274.99995626013146"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-93ECAD84-20B9-438E-A98A-261C98D30191" id="BPMNEdge_sid-93ECAD84-20B9-438E-A98A-261C98D30191" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.00000000000003" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="245.94995164572788" y="424.74745258835253"></omgdi:waypoint>
+        <omgdi:waypoint x="394.0" y="424.0"></omgdi:waypoint>
+        <omgdi:waypoint x="394.7315306068175" y="314.9499192804334"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8F36396B-A042-442B-9195-82AD42B49774" id="BPMNEdge_sid-8F36396B-A042-442B-9195-82AD42B49774" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.99999999999997" flowable:targetDockerX="50.0" flowable:targetDockerY="39.999999999999986">
+        <omgdi:waypoint x="1599.9499888241292" y="273.99996348470756"></omgdi:waypoint>
+        <omgdi:waypoint x="1679.9999749660494" y="273.9999627093631"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

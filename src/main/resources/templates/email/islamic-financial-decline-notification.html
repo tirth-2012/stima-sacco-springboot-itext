@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Status</title>
+
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .amount {
+            font-weight: 600;
+            color: #065f46;
+        }
+
+        .reason {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fef2f2;
+            color: #b91c1c;
+            border-radius: 5px;
+        }
+
+        .btn-container {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2563eb;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        Loan Application Update
+    </div>
+
+    <div class="content">
+
+        <!-- ✅ GENERIC GREETING -->
+        <p>
+            Dear <strong>Sir/Madam</strong>,
+        </p>
+
+        <p>
+            We regret to inform you that your application for
+            <span class="highlight" th:text="${productType}"></span>
+            of
+            <span class="amount">KSH <span th:text="${loanAmount}"></span></span>
+            has not been approved at this time.
+        </p>
+
+        <!-- ✅ OPTIONAL REASON -->
+        <div th:if="${includeReason}">
+            <div class="reason">
+                <strong>Reason:</strong>
+                <span th:text="${declinedReason}"></span>
+            </div>
+        </div>
+
+        <p>
+            For further assistance, please contact your Relationship Manager.
+        </p>
+
+        <p>
+            Reference ID:
+            <span class="highlight" th:text="${referenceId}"></span>
+        </p>
+
+        <!-- ✅ VIEW LINK BUTTON -->
+        <div class="btn-container">
+            <a th:href="${viewLink}" target="_blank" class="btn-primary">
+                View Application
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 Stima SACCO • SASRA-Regulated
+    </div>
+
+</div>
+
+</body>
+</html>

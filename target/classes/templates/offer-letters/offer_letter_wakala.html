@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+      color: #0F172A;
+      line-height: 1.55;
+      padding: 0;
+      margin: 0;
+    }
+
+    .page-header {
+      background-color: #1B3A6B;
+      padding: 10px 28px;
+      margin-bottom: 0;
+    }
+
+    .page-header .bank-name {
+      color: #FFFFFF;
+      font-size: 12pt;
+      font-weight: bold;
+      display: block;
+    }
+
+    .page-header .bank-sub {
+      color: #C9A24A;
+      font-size: 7.5pt;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .gold-rule {
+      height: 3px;
+      background-color: #C9A24A;
+    }
+
+    .content {
+      padding: 18px 28px 20px 28px;
+    }
+
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+    }
+
+    .ref-table td {
+      padding: 2px 0;
+      font-size: 10pt;
+      vertical-align: top;
+    }
+
+    .ref-table td.ref-label {
+      font-weight: bold;
+      color: #6B7280;
+      width: 110px;
+    }
+
+    .salutation {
+      margin-bottom: 6px;
+    }
+
+    .re-line {
+      font-weight: bold;
+      color: #1B3A6B;
+      margin-bottom: 10px;
+      border-bottom: 1.5px solid #1B3A6B;
+      padding-bottom: 6px;
+    }
+
+    .opening {
+      text-align: justify;
+      margin-bottom: 12px;
+    }
+
+    .clause-heading {
+      font-weight: bold;
+      font-size: 10pt;
+      margin-top: 14px;
+      margin-bottom: 5px;
+      text-decoration: underline;
+    }
+
+    p.body {
+      text-align: justify;
+      margin-bottom: 6px;
+      font-size: 10pt;
+    }
+
+    .terms-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 10px 0;
+      font-size: 9.5pt;
+    }
+
+    .terms-table tr:nth-child(odd) td {
+      background-color: #F9FAFB;
+    }
+
+    .terms-table tr:nth-child(even) td {
+      background-color: #FFFFFF;
+    }
+
+    .terms-table td {
+      padding: 4px 8px;
+      border-bottom: 0.5px solid #E5E7EB;
+      vertical-align: top;
+    }
+
+    .terms-table td.label {
+      font-weight: bold;
+      color: #6B7280;
+      width: 38%;
+    }
+
+    ol.alpha {
+      list-style-type: lower-alpha;
+      padding-left: 22px;
+      margin: 6px 0;
+    }
+
+    ol.roman {
+      list-style-type: lower-roman;
+      padding-left: 22px;
+      margin: 6px 0;
+    }
+
+    ol li {
+      margin-bottom: 4px;
+      text-align: justify;
+      font-size: 10pt;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #E5E7EB;
+      margin: 14px 0;
+    }
+
+    .navy-divider {
+      border: none;
+      border-top: 1.5px solid #1B3A6B;
+      margin: 14px 0;
+    }
+
+    .sig-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    .sig-table td {
+      width: 50%;
+      vertical-align: top;
+      padding-right: 12px;
+      font-size: 9.5pt;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid #374151;
+      width: 200px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+
+    .sig-name {
+      font-weight: bold;
+    }
+
+    .sig-title {
+      color: #6B7280;
+    }
+
+    .sig-date {
+      color: #9CA3AF;
+      margin-top: 4px;
+    }
+
+    .acceptance-heading {
+      font-weight: bold;
+      font-size: 11pt;
+      color: #1B3A6B;
+      margin: 16px 0 8px 0;
+      border-top: 1px solid #E5E7EB;
+      padding-top: 12px;
+    }
+
+    .page-footer {
+      background-color: #1B3A6B;
+      padding: 6px 28px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .page-footer p {
+      color: #FFFFFF;
+      font-size: 7pt;
+      margin: 1px 0;
+    }
+
+    .page-footer .gold-top {
+      height: 2px;
+      background-color: #C9A24A;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <span class="bank-name">STIMA SACCO SOCIETY LIMITED</span>
+  <span class="bank-sub">
+    SASRA Regulated Deposit Taking SACCO
+  </span>
+</div>
+
+<div class="gold-rule"></div>
+
+<div class="content">
+
+  <!-- Reference block -->
+  <table class="ref-table">
+
+    <tr>
+      <td class="ref-label">Our Ref:</td>
+      <td th:text="${applicationRef} + '-OL'">
+        STIMA-LOS-2026-00007-OL
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Date:</td>
+      <td th:text="${offerDate}">
+        14 April 2026
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Member Name:</td>
+      <td th:text="${fullName}">
+        John Doe
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Member No:</td>
+      <td th:text="${memberNumber}">
+        STM-001122
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Address:</td>
+      <td th:text="${customerAddress}">
+        Nairobi, Kenya
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Email:</td>
+      <td th:text="${customerEmail}">
+        member@sacco.co.ke
+      </td>
+    </tr>
+
+    <tr>
+      <td class="ref-label">Mobile:</td>
+      <td th:text="${mobile}">
+        0712345678
+      </td>
+    </tr>
+
+  </table>
+
+  <p class="salutation">Dear Member,</p>
+
+  <p class="re-line">
+    Re: OFFER OF LOAN FACILITY —
+    <span th:text="${facilityAmountWords}">
+      KES 500,000.00
+    </span>
+  </p>
+
+  <p class="opening">
+    We, STIMA SACCO Society Limited ("the SACCO"),
+    refer to your loan application dated
+    <span th:text="${applicationDate}">08 April 2026</span>
+    and are pleased to inform you that your application has been approved
+    subject to the terms and conditions outlined in this Offer Letter.
+  </p>
+
+  <!-- 1 -->
+  <div class="clause-heading">
+    1. PURPOSE AND TYPE OF FACILITY
+  </div>
+
+  <p class="body">
+    The facility has been granted to the Borrower for the purpose of
+    <span th:text="${facilityPurpose}">
+      Development and personal financial support
+    </span>.
+  </p>
+
+  <p class="body">
+    The facility is granted in accordance with STIMA SACCO lending policies,
+    terms, and member eligibility requirements.
+  </p>
+
+  <!-- 2 -->
+  <div class="clause-heading">
+    2. AMOUNT OF FACILITY AND REPAYMENT
+  </div>
+
+  <p class="body">
+    The maximum amount available for disbursement shall not exceed
+    <strong th:text="${facilityAmountWords}">
+      KES 500,000.00
+    </strong>.
+  </p>
+
+  <table class="terms-table">
+
+    <tr>
+      <td class="label">Facility Type:</td>
+      <td th:text="${productName}">
+        Development Loan
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Loan Amount:</td>
+      <td th:text="${facilityAmount}">
+        500000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Repayment Period:</td>
+      <td th:text="${tenorMonths} + ' months'">
+        24 months
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Interest / Profit Rate:</td>
+      <td th:text="${profitRate} + '%'">
+        12%
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Monthly Instalment:</td>
+      <td th:text="${monthlyInstalment}">
+        25000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Total Repayable Amount:</td>
+      <td th:text="${totalRepayable}">
+        600000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Repayment Method:</td>
+      <td th:text="${paymentMethod}">
+        Payroll Deduction
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- 3 -->
+  <div class="clause-heading">
+    3. LOAN CHARGES AND FEES
+  </div>
+
+  <table class="terms-table">
+
+    <tr>
+      <td class="label">Facility Fee:</td>
+      <td th:text="${facilityFee}">
+        5000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Insurance:</td>
+      <td th:text="${insurance}">
+        5000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Excise Duty:</td>
+      <td th:text="${exciseDuty}">
+        1000
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Legal Fees:</td>
+      <td>
+        At cost where applicable
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- 4 -->
+  <div class="clause-heading">
+    4. SECURITY
+  </div>
+
+  <p class="body">
+    The proposed facility shall be secured by the following:
+  </p>
+
+  <ol class="roman">
+    <li th:each="sec : ${securityItems}" th:text="${sec}">
+      Security item
+    </li>
+  </ol>
+
+  <!-- 5 -->
+  <div class="clause-heading">
+    5. GUARANTOR DETAILS
+  </div>
+
+  <p class="body">
+    The following guarantors shall support the facility:
+  </p>
+
+  <table class="terms-table">
+
+    <tr>
+      <td class="label">Full Name</td>
+      <td class="label">Member No</td>
+      <td class="label">Mobile</td>
+      <td class="label">Amount</td>
+      <td class="label">Status</td>
+    </tr>
+
+    <tr th:each="guarantor : ${guarantors}">
+      <td th:text="${guarantor.fullName}">John Doe</td>
+      <td th:text="${guarantor.memberNumber}">MEM001</td>
+      <td th:text="${guarantor.mobileNumber}">0712345678</td>
+      <td th:text="${guarantor.guarantorAmount}">100000</td>
+      <td th:text="${guarantor.status}">ACTIVE</td>
+    </tr>
+
+  </table>
+
+  <!-- 6 -->
+  <div class="clause-heading">
+    6. INSURANCE
+  </div>
+
+  <p class="body">
+    The Borrower shall maintain valid insurance coverage over all secured assets where applicable.
+    STIMA SACCO Society Limited may require proof of insurance before loan disbursement and during
+    the repayment period.
+  </p>
+
+  <!-- 7 -->
+  <div class="clause-heading">
+    7. CONDITIONS PRECEDENT
+  </div>
+
+  <ol class="alpha">
+    <li th:each="cp : ${conditionsPrecedent}" th:text="${cp}">
+      Condition precedent
+    </li>
+  </ol>
+
+  <!-- 8 -->
+  <div class="clause-heading">
+    8. MEMBER OBLIGATIONS AND COVENANTS
+  </div>
+
+  <ol class="alpha">
+    <li th:each="cov : ${covenants}" th:text="${cov}">
+      Covenant item
+    </li>
+  </ol>
+
+  <!-- 9 -->
+  <div class="clause-heading">
+    9. EVENTS OF DEFAULT
+  </div>
+
+  <ol class="roman">
+    <li>Failure to pay any instalment on the due date;</li>
+    <li>Breach of any term or condition of this Offer Letter;</li>
+    <li>Submission of false or misleading information;</li>
+    <li>Failure to maintain pledged securities where applicable;</li>
+    <li>Any action that materially affects the Borrower's repayment ability.</li>
+  </ol>
+
+  <!-- 10 -->
+  <div class="clause-heading">
+    10. CREDIT REFERENCE BUREAUS
+  </div>
+
+  <p class="body">
+    The Borrower expressly consents to STIMA SACCO Society Limited sharing
+    credit information with licensed Credit Reference Bureaus in accordance
+    with applicable laws and regulations.
+  </p>
+
+  <!-- 11 -->
+  <div class="clause-heading">
+    11. AVAILABILITY AND GENERAL
+  </div>
+
+  <p class="body">
+    This offer is open for acceptance within fourteen (14) days from the date hereof.
+    This Offer Letter shall be governed by the laws of the Republic of Kenya
+    and the lending policies of STIMA SACCO Society Limited.
+  </p>
+
+  <hr class="navy-divider"/>
+
+  <p class="body">Yours faithfully,</p>
+
+  <p class="body">
+    For: <strong>STIMA SACCO Society Limited</strong>
+  </p>
+
+  <table class="sig-table">
+
+    <tr>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name" th:text="${approverName}">
+          Credit Officer
+        </div>
+
+        <div class="sig-title" th:text="${approverTitle}">
+          Loans Officer
+        </div>
+
+        <div class="sig-title" th:text="'Date: ' + ${dateOfApproval}">
+          Date
+        </div>
+      </td>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name">
+          Authorised Signatory
+        </div>
+
+        <div class="sig-title">
+          Loans Department
+        </div>
+
+        <div class="sig-title" th:text="'Date: ' + ${dateOfApproval}">
+          Date
+        </div>
+      </td>
+
+    </tr>
+
+  </table>
+
+  <!-- ACCEPTANCE -->
+  <div class="acceptance-heading">
+    ACCEPTANCE BY BORROWER
+  </div>
+
+  <p class="body">
+    I, the undersigned Borrower,
+    hereby unconditionally accept this offer on the terms and conditions
+    contained in this Offer Letter.
+  </p>
+
+  <table class="sig-table" style="margin-top:18px;">
+
+    <tr>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name" th:text="${fullName}">
+          Member Name
+        </div>
+
+        <div class="sig-title">
+          Borrower / Member
+        </div>
+
+        <div class="sig-title">
+          Member No:
+          <span th:text="${memberNumber}">STM-001122</span>
+        </div>
+
+        <div class="sig-title" th:text="'Date: ' + ${dateOfApproval}">
+          Date
+        </div>
+      </td>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name">
+          Witness
+        </div>
+
+        <div class="sig-title">
+          Signature
+        </div>
+
+        <div class="sig-title">
+          Date: ___________________
+        </div>
+      </td>
+
+    </tr>
+
+  </table>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+
+  <div class="gold-top"></div>
+
+  <p th:text="'Offer Letter — ' + ${fullName} + ' — ' + ${applicationRef}">
+    Offer Letter
+  </p>
+
+  <p>
+    STIMA SACCO Society Limited |
+    Nairobi, Kenya |
+    www.stima-sacco.com
+  </p>
+
+  <p>
+    Classification: Confidential — STIMA SACCO Internal Use
+  </p>
+
+</div>
+
+</body>
+</html>

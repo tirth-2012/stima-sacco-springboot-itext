@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 10pt; color: #0F172A; line-height: 1.55; }
+  .page-header { background-color: #1B3A6B; padding: 10px 28px; }
+  .page-header .bank-name { color: #FFFFFF; font-size: 12pt; font-weight: bold; display: block; }
+  .page-header .bank-sub { color: #C9A24A; font-size: 7.5pt; display: block; margin-top: 2px; }
+  .gold-rule { height: 3px; background-color: #C9A24A; }
+  .shariah-banner {
+    background-color: #FEFCE8; border: 1.5px solid #F59E0B;
+    padding: 7px 14px; margin: 12px 28px 0 28px;
+    font-size: 9pt; color: #92400E;
+  }
+  .content { padding: 16px 28px 20px 28px; }
+  .doc-title { font-size: 15pt; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .doc-sub { font-size: 9pt; color: #6B7280; text-align: center; margin-bottom: 10px; }
+  .navy-rule { border: none; border-top: 1.5px solid #1B3A6B; margin: 10px 0; }
+  .gray-rule { border: none; border-top: 0.5px solid #E5E7EB; margin: 10px 0; }
+  .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .ref-table td { padding: 2px 0; font-size: 9.5pt; vertical-align: top; }
+  .ref-table td.rl { font-weight: bold; color: #6B7280; width: 130px; }
+  .clause-num { font-weight: bold; color: #1B3A6B; font-size: 10pt; margin-top: 12px; margin-bottom: 3px; }
+  p.body { text-align: justify; margin-bottom: 6px; font-size: 9.5pt; line-height: 1.55; }
+  .terms-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; }
+  .terms-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .terms-table td { padding: 4px 8px; border-bottom: 0.5px solid #E5E7EB; vertical-align: top; }
+  .terms-table td.tl { font-weight: bold; color: #6B7280; width: 40%; }
+  .sched-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.5pt; }
+  .sched-table th { background: #1B3A6B; color: #fff; padding: 4px 8px; }
+  .sched-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .sched-table tr:last-child td { background: #DBEAFE; font-weight: bold; }
+  .sched-table td { padding: 3px 8px; border-bottom: 0.5px solid #E5E7EB; text-align: right; }
+  .sched-table td:first-child { text-align: left; }
+  ol.alpha { list-style-type: lower-alpha; padding-left: 22px; margin: 5px 0; }
+  ol.roman { list-style-type: lower-roman; padding-left: 22px; margin: 5px 0; }
+  ol li { margin-bottom: 4px; font-size: 9.5pt; text-align: justify; }
+  .sig-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .sig-table td { width: 50%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; }
+  .sig-line { border-bottom: 1px solid #374151; width: 210px; height: 24px; margin-bottom: 4px; }
+  .sig-name { font-weight: bold; }
+  .sig-role { color: #6B7280; }
+  .sig-date { color: #9CA3AF; margin-top: 3px; }
+  .ssb-box { background: #FEFCE8; border: 1px solid #F59E0B; padding: 8px 12px; margin-top: 14px; font-size: 9pt; color: #92400E; }
+  .page-footer { background-color: #1B3A6B; padding: 6px 28px; margin-top: 20px; text-align: center; }
+  .page-footer p { color: #FFFFFF; font-size: 7pt; margin: 1px 0; }
+  .page-footer .gold-top { height: 2px; background-color: #C9A24A; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="bank-name">STIMA SACCO SOCIETY LIMITED</span>
+  <span class="bank-sub">SASRA Regulated Deposit Taking SACCO</span>
+</div>
+<div class="gold-rule"></div>
+
+<!-- SACCO banner -->
+<div class="shariah-banner">
+  This Facility Agreement is issued by STIMA SACCO Society Limited and is subject to SACCO lending policies, approval terms, and member obligations.
+  Reference No:
+  <strong th:text="${applicationRef}">STIMA-LOS-2026-00007</strong>
+</div>
+
+<div class="content">
+
+  <!-- Agreement Title -->
+  <div class="doc-title">
+    STIMA SACCO FACILITY AGREEMENT
+  </div>
+
+  <div class="doc-sub">
+    Loan &amp; Financing Agreement
+  </div>
+
+  <hr class="navy-rule"/>
+
+  <table class="ref-table">
+    <tr><td class="rl">Agreement Ref:</td><td th:text="${applicationRef}">STIMA-LOS-2026-00007</td></tr>
+    <tr><td class="rl">Agreement Date:</td><td th:text="${agreementDate}">16 April 2026</td></tr>
+    <tr><td class="rl">Classification:</td><td>CONFIDENTIAL — STIMA SACCO INTERNAL USE</td></tr>
+  </table>
+
+  <div class="clause-num">PARTIES</div>
+
+  <p class="body">
+    <strong>THE SACCO:</strong> STIMA SACCO Society Limited, a deposit taking SACCO
+    regulated under the SACCO Societies Regulatory Authority (SASRA),
+    Nairobi, Kenya ("the SACCO").
+  </p>
+
+  <p class="body">
+    <strong>THE BORROWER:</strong><span th:text="${fullName}">Faith Nyambura Wairimu</span>,
+    Member No.<span th:text="${memberNumber}">STM-00038111</span>,
+    Mobile No.<span th:text="${mobile}">0712345678</span>,
+    Email:<span th:text="${email}">member@sacco.co.ke</span>
+    ("the Borrower").
+  </p>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">1. THE FACILITY</div>
+
+  <table class="terms-table">
+
+    <tr><td class="tl">Facility Type:</td><td th:text="${productName}">Development Loan</td></tr>
+    <tr><td class="tl">Loan Amount:</td><td th:text="'KES ' + ${facilityAmount}">KES 500,000.00</td></tr>
+    <tr><td class="tl">Interest / Profit Rate:</td><td th:text="${profitRate} + '%'">12%</td></tr>
+    <tr><td class="tl">Monthly Instalment:</td><td th:text="'KES ' + ${monthlyInstalment}">KES 25,000.00</td></tr>
+    <tr><td class="tl">Repayment Period:</td><td th:text="${tenorMonths} + ' months'">24 months</td></tr>
+    <tr><td class="tl">First Instalment Date:</td><td th:text="${firstInstalmentDate}">31 May 2026</td></tr>
+    <tr><td class="tl">Total Repayable Amount:</td><td th:text="'KES ' + ${totalSalePrice}">KES 600,000.00</td></tr>
+    <tr><td class="tl">Disbursement Method:</td><td>Direct to Member Account</td></tr>
+  </table>
+
+  <p class="body">
+    The Borrower agrees to repay the facility through monthly instalments for the agreed repayment period.
+    Any overdue instalment may attract penalties in accordance with STIMA SACCO lending policies and terms.
+  </p>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">2. REPAYMENT SCHEDULE</div>
+
+  <table class="sched-table">
+
+    <tr>
+      <th>Month</th>
+      <th>Due Date</th>
+      <th>Instalment (KES)</th>
+      <th>Interest (KES)</th>
+      <th>Principal (KES)</th>
+      <th>Balance (KES)</th>
+    </tr>
+
+    <tr th:each="row : ${repaymentSchedule}">
+      <td th:text="${row.month}">1</td>
+      <td th:text="${row.dueDate}">31 May 2026</td>
+      <td th:text="${row.instalment}">171,760</td>
+      <td th:text="${row.interestOrProfit}">60,417</td>
+      <td th:text="${row.principal}">111,343</td>
+      <td th:text="${row.balance}">4,888,657</td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><strong>TOTAL</strong></td>
+      <td th:text="${totalSalePrice}">6,183,360</td>
+      <td th:text="${profitAmount}">1,183,360</td>
+      <td th:text="${facilityAmount}">5,000,000</td>
+      <td>0.00</td>
+    </tr>
+
+  </table>
+
+  <p style="font-size:7.5pt; color:#6B7280; margin-top:4px;">
+    The repayment schedule forms part of this agreement and shall be provided upon loan disbursement.
+  </p>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">3. SECURITY</div>
+
+  <ol class="roman">
+    <li th:each="sec : ${securityItems}" th:text="${sec}">
+      Security item
+    </li>
+  </ol>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">4. GUARANTOR DETAILS</div>
+
+  <table class="terms-table">
+
+    <tr>
+      <td class="tl"><strong>Full Name</strong></td>
+      <td class="tl"><strong>Member No</strong></td>
+      <td class="tl"><strong>Mobile</strong></td>
+      <td class="tl"><strong>Amount</strong></td>
+      <td class="tl"><strong>Status</strong></td>
+    </tr>
+
+    <tr th:each="guarantor : ${guarantors}">
+
+      <td th:text="${guarantor.fullName}">
+        John Doe
+      </td>
+
+      <td th:text="${guarantor.memberNumber}">
+        MEM001
+      </td>
+
+      <td th:text="${guarantor.mobileNumber}">
+        0712345678
+      </td>
+
+      <td th:text="'KES ' + ${guarantor.guarantorAmount}">
+        KES 100000
+      </td>
+
+      <td th:text="${guarantor.status}">
+        ACTIVE
+      </td>
+
+    </tr>
+
+  </table>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">5. INSURANCE</div>
+
+  <p class="body">
+    The Borrower shall maintain valid insurance coverage over all secured assets where applicable.
+    STIMA SACCO Society Limited may require proof of insurance before loan disbursement and during
+    the repayment period.
+  </p>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">6. MEMBER OBLIGATIONS</div>
+
+  <ol class="alpha">
+    <li>The Borrower shall make all repayments on or before the agreed due dates.</li>
+    <li>The Borrower shall provide accurate and complete information to STIMA SACCO.</li>
+    <li>The Borrower shall comply with all SACCO lending terms and conditions.</li>
+    <li>The Borrower shall notify the SACCO of any material financial changes.</li>
+  </ol>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">7. EVENTS OF DEFAULT</div>
+
+  <ol class="roman">
+    <li>Failure to pay any instalment on the due date;</li>
+    <li>Breach of any term or condition of this Agreement;</li>
+    <li>Submission of false or misleading information;</li>
+    <li>Failure to maintain pledged securities where applicable;</li>
+    <li>Any action that materially affects the Borrower's repayment ability.</li>
+  </ol>
+
+  <hr class="gray-rule"/>
+
+  <div class="clause-num">8. GOVERNING LAW</div>
+
+  <p class="body">
+    This Agreement shall be governed and interpreted in accordance with the laws of the
+    Republic of Kenya and the lending policies of STIMA SACCO Society Limited.
+    Any disputes arising from this Agreement shall be subject to the jurisdiction of the Kenyan courts.
+  </p>
+
+  <hr class="navy-rule"/>
+
+  <p class="body">
+    IN WITNESS WHEREOF the parties have executed this Agreement on the date stated above.
+  </p>
+
+  <table class="sig-table">
+    <tr>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name">
+          For: STIMA SACCO Society Limited
+        </div>
+
+        <div class="sig-role" th:text="${approverName}">
+          Credit Officer
+        </div>
+
+        <div class="sig-role" th:text="${approverTitle}">
+          Loans Officer
+        </div>
+
+        <div class="sig-date">
+          Date:
+          <span th:text="${agreementDate}">16 April 2026</span>
+        </div>
+      </td>
+
+      <td>
+        <div class="sig-line"></div>
+
+        <div class="sig-name" th:text="${fullName}">
+          Member Name
+        </div>
+
+        <div class="sig-role">
+          Borrower / Member
+        </div>
+
+        <div class="sig-role">
+          Member No:
+          <span th:text="${memberNumber}">STM-00038111</span>
+        </div>
+
+        <div class="sig-date">
+          Date: _____________________
+        </div>
+      </td>
+
+    </tr>
+  </table>
+
+  <p style="margin-top:12px; color:#9CA3AF; font-size:9pt;">
+    Witness: ___________________________
+    &#160;&#160;
+    Signature: ___________________________
+    &#160;&#160;
+    Date: _______________
+  </p>
+
+</div>
+
+<div class="page-footer">
+
+  <div class="gold-top"></div>
+
+  <p th:text="'Facility Agreement — ' + ${fullName} + ' — ' + ${applicationRef}">
+    Facility Agreement
+  </p>
+
+  <p>
+    STIMA SACCO Society Limited |
+    Nairobi, Kenya |
+    www.stima-sacco.com
+  </p>
+
+  <p>
+    Classification: Confidential — STIMA SACCO Internal Use
+  </p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- Application Name -->
+    <springProperty scope="context"
+                    name="APP_NAME"
+                    source="spring.application.name"
+                    defaultValue="flowable-service"/>
+
+    <!-- Console Pattern -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M:%line - %msg%n"/>
+
+    <!-- File Pattern -->
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M:%line - %msg%n"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+
+    </appender>
+
+    <!-- Rolling File Appender -->
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>logs/${APP_NAME}.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <!-- Daily rollover -->
+            <fileNamePattern>
+                logs/${APP_NAME}.%d{yyyy-MM-dd}.%i.log.gz
+            </fileNamePattern>
+
+            <!-- Max single file size -->
+            <maxFileSize>50MB</maxFileSize>
+
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+
+            <!-- Total log cap -->
+            <totalSizeCap>5GB</totalSizeCap>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+
+    </appender>
+
+    <!-- Async Logging -->
+    <appender name="ASYNC_FILE"
+              class="ch.qos.logback.classic.AsyncAppender">
+
+        <queueSize>5000</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+
+        <appender-ref ref="FILE"/>
+
+    </appender>
+
+    <!-- Root Logger -->
+    <root level="INFO">
+
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_FILE"/>
+
+    </root>
+
+    <!-- Hibernate -->
+    <logger name="org.hibernate.SQL" level="WARN"/>
+    <logger name="org.hibernate.type.descriptor.sql" level="WARN"/>
+
+    <!-- Spring -->
+    <logger name="org.springframework" level="INFO"/>
+
+</configuration>

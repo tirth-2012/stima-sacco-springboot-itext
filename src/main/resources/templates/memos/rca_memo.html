@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 9.5pt; color: #0F172A; line-height: 1.5; }
+  .page-header { background-color: #1B3A6B; padding: 10px 28px; }
+  .page-header .bank-name { color: #FFFFFF; font-size: 12pt; font-weight: bold; display: block; }
+  .page-header .bank-sub { color: #C9A24A; font-size: 7.5pt; display: block; margin-top: 2px; }
+  .gold-rule { height: 3px; background-color: #C9A24A; }
+  .content { padding: 14px 28px 20px 28px; }
+  .doc-title { font-size: 14pt; font-weight: bold; text-align: center; margin-bottom: 3px; }
+  .doc-sub { font-size: 8.5pt; color: #6B7280; text-align: center; margin-bottom: 8px; }
+  .navy-rule { border: none; border-top: 1.5px solid #1B3A6B; margin: 8px 0; }
+  .gray-rule { border: none; border-top: 0.5px solid #E5E7EB; margin: 8px 0; }
+  .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; }
+  .meta-table td { padding: 2.5px 6px; vertical-align: top; border-bottom: 0.3px solid #E5E7EB; }
+  .meta-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .meta-table td.ml { font-weight: bold; color: #6B7280; width: 38%; }
+  .section-heading { font-weight: bold; color: #1B3A6B; font-size: 10pt; margin-top: 10px; margin-bottom: 4px; }
+  p.body { text-align: justify; margin-bottom: 5px; font-size: 9.5pt; }
+  /* Scorecard */
+  .score-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 8.5pt; }
+  .score-table th { background: #1B3A6B; color: #fff; padding: 4px 8px; text-align: left; }
+  .score-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .score-table tr:last-child td { background: #FEF3C7; font-weight: bold; color: #92400E; }
+  .score-table td { padding: 3.5px 8px; border-bottom: 0.3px solid #E5E7EB; }
+  /* Obligations table */
+  .obl-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 8.5pt; }
+  .obl-table th { background: #1B3A6B; color: #fff; padding: 4px 8px; }
+  .obl-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .obl-table tr:last-child td { background: #F0F2F5; font-weight: bold; }
+  .obl-table td { padding: 3px 8px; border-bottom: 0.3px solid #E5E7EB; text-align: right; }
+  .obl-table td:first-child, .obl-table td:nth-child(2) { text-align: left; }
+  /* Recommendation box */
+  .rec-box { padding: 8px 14px; margin: 8px 0; border-radius: 3px; font-size: 9.5pt; }
+  .rec-approve { background: #DCFCE7; border: 1px solid #166534; color: #166534; }
+  .rec-decline { background: #FEE2E2; border: 1px solid #B91C1C; color: #B91C1C; }
+  .cond-item { margin-bottom: 5px; font-size: 9.5pt; text-align: justify; }
+  /* Islamic badge */
+  .islamic-badge { background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E;
+                   padding: 5px 10px; font-size: 8.5pt; margin-bottom: 8px; }
+  /* Sig */
+  .sig-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+  .sig-table td { width: 50%; vertical-align: top; font-size: 9pt; padding-right: 10px; }
+  .sig-line { border-bottom: 1px solid #374151; width: 200px; height: 22px; margin-bottom: 3px; }
+  .sig-name { font-weight: bold; }
+  .sig-role { color: #6B7280; }
+  .page-footer { background-color: #1B3A6B; padding: 6px 28px; margin-top: 18px; text-align: center; }
+  .page-footer p { color: #FFFFFF; font-size: 7pt; margin: 1px 0; }
+  .page-footer .gold-top { height: 2px; background-color: #C9A24A; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="bank-name">STIMA SACCO Society Limited</span>
+  <span class="bank-sub">SASRA Regulated Deposit Taking SACCO</span>
+</div>
+<div class="gold-rule"></div>
+
+<div class="content">
+  <div class="doc-title">CREDIT ANALYSIS MEMORANDUM</div>
+  <div class="doc-sub">
+    Loan Processing &amp; Credit Assessment
+  </div>
+  <hr class="navy-rule"/>
+
+  <!-- Meta table -->
+  <table class="meta-table">
+    <tr><td class="ml">Memo Reference:</td><td th:text="${applicationRef} + '-RCAMEMO'">DIB-WAKALA-2026-00003-RCAMEMO</td></tr>
+    <tr><td class="ml">Prepared by:</td><td th:text="${analystName} + ' — Risk Credit Analyst (' + ${analystUsername} + ')'">Ayesha Kapoor (akapoor)</td></tr>
+    <tr><td class="ml">Date:</td><td th:text="${memoDate}">13 April 2026</td></tr>
+    <tr><td class="ml">Application Ref:</td><td th:text="${applicationRef}">DIB-WAKALA-2026-00003</td></tr>
+    <tr><td class="ml">Customer:</td><td th:text="${customerName} + ' (' + ${cifNumber} + ')'">Patel Agro Industries Limited (CIF-3041)</td></tr>
+    <tr><td class="ml">Product:</td><td th:text="${productName}">Development Loan</td></tr>  <tr><td class="ml">Facility Amount:</td><td th:text="'KES ' + ${facilityAmount}">KES 60,000,000.00</td></tr>
+    <tr><td class="ml">Facility Fee:</td><td th:text="'KES ' + ${facilityFee}">KES 60,000,000.00</td></tr>
+    <tr><td class="ml">Excise Duty:</td><td th:text="'KES ' + ${exciseDuty}">KES 6000</td></tr>
+    <tr><td class="ml">Insurance:</td><td th:text="${insurance}"></td></tr>
+
+    <tr>
+      <td class="ml">Stage:</td><td th:text="'Credit Assessment — Forwarding to ' + ${nextStage}">Credit Assessment — Forwarding</td></tr>
+      <tr><td class="ml">Classification:</td><td>CONFIDENTIAL — Credit Risk Use Only</td></tr>
+  </table>
+
+  <!-- Executive Summary -->
+  <div class="section-heading">1. EXECUTIVE SUMMARY</div>
+  <p class="body" th:text="${executiveSummary}">
+    Executive summary placeholder — populated from process variable.
+  </p>
+  <div class="rec-box" th:classappend="${rcaDecision == 'APPROVE_WITH_CONDITIONS'} ? 'rec-approve' : 'rec-decline'">
+    <strong>RCA RECOMMENDATION:
+      <span th:text="${rcaDecision == 'APPROVE_WITH_CONDITIONS'} ? 'APPROVE WITH CONDITIONS' : 'DECLINE'">APPROVE WITH CONDITIONS</span>
+    </strong>
+    <span th:text="' — ' + ${rcaConditionCount} + ' condition(s) attached. See Section 6.'"> — 3 conditions attached.</span>
+  </div>
+
+  <!-- Customer Profile -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">2. CUSTOMER PROFILE</div>
+  <table class="meta-table">
+    <tr><td class="ml">Registered Name:</td><td th:text="${customerName}">Patel Agro Industries Limited</td></tr>
+    <tr><td class="ml">Industry:</td><td th:text="${industry}">Agro-processing, food manufacturing and distribution</td></tr>
+    <tr><td class="ml">Years in Operation:</td><td th:text="${yearsInOperation}">9 years</td></tr>
+    <tr><td class="ml">Directors:</td><td th:text="${directors}">Ramesh Patel (ID: 22841761), Priya Patel (ID: 26571043)</td></tr>
+    <tr><td class="ml">KRA PIN:</td><td th:text="${kraPIN} + ' (confirmed active on iTax)'">P051284760X</td></tr>
+    <tr><td class="ml">CRB — Metropol:</td><td th:text="${crbScore} + '/900 — Clear, no adverse listings (Ref: ' + ${crbRef} + ')'">728/900 — Clear (MPL-2026-00882)</td></tr>
+    <tr><td class="ml">CRB Report Age:</td><td th:text="${crbAge} + ' — within 30-day freshness policy ✓'">1 day</td></tr>
+  </table>
+
+  <!-- Financial Analysis -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">3. FINANCIAL ANALYSIS</div>
+  <table class="meta-table">
+    <tr><td class="ml">Avg Monthly Revenue (12m):</td><td th:text="'KES ' + ${avgMonthlyRevenue}">KES 4,720,000</td></tr>
+    <tr><td class="ml">Revenue Trend (YoY):</td><td th:text="${revenueTrend}">+14% — positive</td></tr>
+    <tr><td class="ml">Net Operating Income (monthly):</td><td th:text="'KES ' + ${monthlyNOI}">KES 2,200,000</td></tr>
+    <tr><td class="ml">Total Existing Obligations:</td><td th:text="'KES ' + ${existingObligations} + '/month'">KES 475,000/month</td></tr>
+    <tr><td class="ml">Proposed Instalment:</td><td th:text="'KES ' + ${monthlyInstalment} + '/month'">KES 6,600,000/month</td></tr>
+    <tr><td class="ml">Total Monthly Obligations (post-facility):</td><td th:text="'KES ' + ${totalObligations}">KES 7,075,000</td></tr>
+    <tr><td class="ml">Debt Service Ratio (DSR):</td><td th:text="${dsr} + '% — ' + ${dsrStatus}">32.2% — within 40% policy cap ✓</td></tr>
+  </table>
+
+  <!-- Obligations table -->
+  <p class="body" style="margin-top:6px;"><strong>Existing Financial Obligations:</strong></p>
+  <table class="obl-table">
+    <tr>
+      <th>Lender</th><th>Facility Type</th><th>Outstanding (KES)</th><th>Monthly (KES)</th><th>Source</th>
+    </tr>
+    <tr th:each="obl : ${obligations}">
+      <td th:text="${obl.lender}">Equity Bank Kenya</td>
+      <td th:text="${obl.facilityType}">Business Loan</td>
+      <td th:text="${obl.outstanding}">5,800,000</td>
+      <td th:text="${obl.monthly}">310,000</td>
+      <td th:text="${obl.source}">OCR</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>TOTAL</strong></td>
+      <td th:text="${totalObligationsOutstanding}">7,300,000</td>
+      <td th:text="${existingObligations}">475,000</td>
+      <td>—</td>
+    </tr>
+  </table>
+  <p style="font-size:7.5pt; color:#6B7280; margin-top:3px;">CBS = Auto-fetched from Flexcube. OCR = Detected by TeraCMS OCR engine from uploaded bank statements.</p>
+
+  <!-- 5C Scorecard -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">4. 5C SCORECARD</div>
+  <table class="score-table">
+    <tr><th>Dimension</th><th>Score /100</th><th>Weight</th><th>Weighted</th><th>Key Driver</th></tr>
+    <tr th:each="sc : ${scorecardRows}">
+      <td th:text="${sc.dimension}">Character</td>
+      <td th:text="${sc.score}">72</td>
+      <td th:text="${sc.weight}">25%</td>
+      <td th:text="${sc.weighted}">18.0</td>
+      <td th:text="${sc.driver}">Clean CRB, established track record</td>
+    </tr>
+    <tr>
+      <td><strong>COMPOSITE</strong></td>
+      <td th:text="${compositeScore}"><strong>63</strong></td>
+      <td>100%</td>
+      <td th:text="${compositeWeighted}">63.0</td>
+      <td th:text="${riskBand}">Moderate Risk — Risk Band C+</td>
+    </tr>
+  </table>
+  <p style="font-size:7.5pt; color:#6B7280; margin-top:3px;">Scores computed by TeraCMS Credit Scoring Engine — read-only.</p>
+
+  <!-- Collateral -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">5. COLLATERAL ASSESSMENT</div>
+  <table class="meta-table">
+    <tr><td class="ml">Security Type:</td><td th:text="${collateralType}">Land — first legal charge</td></tr>
+    <tr><td class="ml">Description:</td><td th:text="${collateralDescription}">LR/MKS/4572 — Athi River Industrial Zone</td></tr>
+    <tr><td class="ml">Search / Status:</td><td th:text="${collateralSearchResult}">LRA Form 3 — Clear, no prior encumbrances</td></tr>
+    <tr><td class="ml">Valuer:</td><td th:text="${valuer}">Knight Frank Kenya Ltd (DIB approved panel)</td></tr>
+    <tr><td class="ml">Market Value:</td><td th:text="'KES ' + ${collateralMarketValue}">KES 120,000,000</td></tr>
+    <tr><td class="ml">Forced Sale Value (FSV):</td><td th:text="'KES ' + ${collateralFSV}">KES 91,200,000</td></tr>
+    <tr><td class="ml">Coverage Ratio (FSV / Facility):</td><td th:text="${coverageRatio} + ' ✓'">1.52x ✓</td></tr>
+  </table>
+
+  <hr class="gray-rule"/>
+
+  <div class="section-heading">6. GUARANTOR DETAILS</div>
+
+  <table class="meta-table">
+
+    <tr>
+      <th>Full Name</th>
+      <th>Member No</th>
+      <th>Mobile</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+
+    <tr th:each="guarantor : ${guarantors}">
+      <td th:text="${guarantor.fullName}">John Doe</td>
+      <td th:text="${guarantor.memberNumber}">MEM001</td>
+      <td th:text="${guarantor.mobileNumber}">0712345678</td>
+      <td th:text="${guarantor.guarantorAmount}">100000</td>
+      <td th:text="${guarantor.status}">ACTIVE</td>
+    </tr>
+
+  </table>
+
+  <!-- Conditions -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">7. CONDITIONS ATTACHED BY RCA</div>
+  <div th:each="cond, stat : ${rcaConditions}" class="cond-item">
+    <strong th:text="'Condition ' + (${stat.index + 1}) + ':'">Condition 1:</strong>
+    <span th:text="${cond}">Condition description</span>
+  </div>
+
+  <!-- Decision and routing -->
+  <hr class="gray-rule"/>
+  <div class="section-heading">8. RCA DECISION AND ROUTING</div>
+  <table class="meta-table">
+    <tr><td class="ml">RCA Decision:</td>
+        <td><strong th:text="${rcaDecision == 'APPROVE_WITH_CONDITIONS'} ? 'APPROVE WITH CONDITIONS' : 'DECLINE'">APPROVE WITH CONDITIONS</strong></td></tr>
+    <tr><td class="ml">AI Recommendation:</td><td th:text="${aiRecommendation}">Approve with conditions</td></tr>
+    <tr><td class="ml">AI Override:</td><td th:text="${aiOverride}">None — RCA concurs</td></tr>
+    <tr><td class="ml">Forwarded to:</td><td th:text="${nextStage}">Credit Manager</td></tr>
+    <tr><td class="ml">Forwarded by:</td><td th:text="${analystName} + ' (' + ${analystUsername} + ')'">Ayesha Kapoor (akapoor)</td></tr>
+    <tr><td class="ml">Date / Time:</td><td th:text="${memoDate}">13 April 2026</td></tr>
+    <tr><td class="ml">Audit Reference:</td><td th:text="'Flowable PI-' + ${applicationRef} + ' · Event: RCA_APPROVED'">Flowable PI event: RCA_APPROVED</td></tr>
+  </table>
+
+  <p class="body" style="margin-top:8px; color:#6B7280; font-size:8.5pt;">
+    This memorandum is logged permanently in the TeraCMS immutable audit trail.
+  </p>
+
+  <table class="sig-table">
+    <tr>
+      <td>
+        <div class="sig-line"></div>
+        <div class="sig-name" th:text="${analystName}">Ayesha Kapoor</div>
+        <div class="sig-role">Credit Officer — STIMA SACCO Society Limited</div>
+        <div class="sig-role" th:text="'Date: ' + ${memoDate}">Date: 13 April 2026</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="page-footer">
+  <div class="gold-top"></div>
+  <p th:text="'RCA Credit Analysis Memo — ' + ${customerName} + ' — ' + ${applicationRef}">RCA Memo</p>
+  <p>STIMA SACCO Society Limited | Nairobi, Kenya | www.stima-sacco.com</p>
+  <p>Classification: Confidential — STIMA SACCO Internal Use.</p>
+</div>
+</body>
+</html>

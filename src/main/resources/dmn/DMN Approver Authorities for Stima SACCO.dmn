@@ -1,0 +1,49 @@
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definition_708aeabf-534f-11f1-94a3-00ffd3fb0d76" name="DMN Approver Authorities for Stima SACCO" namespace="http://www.flowable.org/dmn" exporter="Flowable Open Source Modeler" exporterVersion="6.8.1">
+  <decision id="dmn_approver_authorities_stima_sacco" name="DMN Approver Authorities for Stima SACCO">
+    <decisionTable id="decisionTable_eb754025-b3be-4c1e-845f-033f065fe453" hitPolicy="COLLECT">
+      <input label="Loan amount">
+        <inputExpression id="inputExpression_f6657ec0-7e65-4384-9b5a-46283640123e" typeRef="number">
+          <text>cost_price</text>
+        </inputExpression>
+      </input>
+      <output id="outputExpression_c151079e-772e-4994-9416-139df7c4c817" label="Approver" name="approver" typeRef="string">
+        <outputValues>
+          <text>"CREDIT_OFFICER","SENIOR_CREDIT_MANAGER","CREDIT_COMMITTEE","BRANCH_CREDIT_COMMITTEE"</text>
+        </outputValues>
+      </output>
+      <rule>
+        <inputEntry id="inputEntry_f6657ec0-7e65-4384-9b5a-46283640123e_1">
+          <text><![CDATA[${cost_price <= 100001}]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_c151079e-772e-4994-9416-139df7c4c817_1">
+          <text><![CDATA["CREDIT_OFFICER"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_f6657ec0-7e65-4384-9b5a-46283640123e_2">
+          <text><![CDATA[${cost_price > 100001 && cost_price  <= 500000 }]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_c151079e-772e-4994-9416-139df7c4c817_2">
+          <text><![CDATA["SENIOR_CREDIT_MANAGER"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_f6657ec0-7e65-4384-9b5a-46283640123e_3">
+          <text><![CDATA[${cost_price > 500001 && cost_price  <= 2000000 }]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_c151079e-772e-4994-9416-139df7c4c817_3">
+          <text><![CDATA["CREDIT_COMMITTEE"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_f6657ec0-7e65-4384-9b5a-46283640123e_4">
+          <text><![CDATA[${cost_price >= 2000001 }]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_c151079e-772e-4994-9416-139df7c4c817_4">
+          <text><![CDATA["BRANCH_CREDIT_COMMITTEE"]]></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI></dmndi:DMNDI>
+</definitions>

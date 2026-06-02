@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 9.5pt; color: #0F172A; line-height: 1.5; }
+  .page-header { background-color: #1B3A6B; padding: 10px 28px; }
+  .page-header .bank-name { color: #FFFFFF; font-size: 12pt; font-weight: bold; display: block; }
+  .page-header .bank-sub { color: #C9A24A; font-size: 7.5pt; display: block; margin-top: 2px; }
+  .gold-rule { height: 3px; background-color: #C9A24A; }
+  .content { padding: 14px 28px 20px 28px; }
+  .doc-title { font-size: 14pt; font-weight: bold; text-align: center; margin-bottom: 3px; }
+  .doc-sub { font-size: 8.5pt; color: #6B7280; text-align: center; margin-bottom: 8px; }
+  .navy-rule { border: none; border-top: 1.5px solid #1B3A6B; margin: 8px 0; }
+  .gray-rule { border: none; border-top: 0.5px solid #E5E7EB; margin: 8px 0; }
+  /* Clearance status banner */
+  .clearance-granted { background: #DCFCE7; border: 2px solid #166534; padding: 10px 16px; text-align: center; margin: 8px 0; }
+  .clearance-granted p { font-size: 13pt; font-weight: bold; color: #166534; }
+  .clearance-granted span { font-size: 9pt; color: #166534; }
+  .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; }
+  .meta-table td { padding: 3px 8px; vertical-align: top; border-bottom: 0.3px solid #E5E7EB; }
+  .meta-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .meta-table td.ml { font-weight: bold; color: #6B7280; width: 38%; }
+  .section-heading { font-weight: bold; color: #1B3A6B; font-size: 10pt; margin-top: 10px; margin-bottom: 4px; }
+  p.body { text-align: justify; margin-bottom: 5px; font-size: 9.5pt; }
+  /* CP table */
+  .cp-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 8.5pt; }
+  .cp-table th { background: #1B3A6B; color: #fff; padding: 4px 8px; text-align: left; }
+  .cp-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .cp-table td { padding: 3.5px 8px; border-bottom: 0.3px solid #E5E7EB; vertical-align: top; }
+  .status-sat { color: #166534; font-weight: bold; }
+  .status-pend { color: #B45309; font-weight: bold; }
+  /* Gate badges */
+  .gates { display: table; width: 100%; margin: 8px 0; }
+  .gate { display: table-cell; width: 33%; padding: 6px 10px; text-align: center; border: 1px solid #E5E7EB; }
+  .gate-pass { background: #DCFCE7; border-color: #166534; }
+  .gate-label { font-size: 7.5pt; color: #6B7280; font-weight: bold; }
+  .gate-status { font-size: 10pt; font-weight: bold; color: #166534; margin-top: 2px; }
+  /* Disbursement instruction */
+  .disb-box { background: #EBF3FF; border: 1px solid #1E40AF; padding: 8px 14px; margin: 8px 0; }
+  .disb-box p { font-size: 9.5pt; margin-bottom: 3px; }
+  /* Sig */
+  .sig-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+  .sig-table td { width: 50%; vertical-align: top; font-size: 9pt; padding-right: 10px; }
+  .sig-line { border-bottom: 1px solid #374151; width: 200px; height: 22px; margin-bottom: 3px; }
+  .sig-name { font-weight: bold; }
+  .sig-role { color: #6B7280; }
+  .page-footer { background-color: #1B3A6B; padding: 6px 28px; margin-top: 18px; text-align: center; }
+  .page-footer p { color: #FFFFFF; font-size: 7pt; margin: 1px 0; }
+  .page-footer .gold-top { height: 2px; background-color: #C9A24A; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="bank-name">STIMA SACCO Society Limited</span>
+  <span class="bank-sub">SASRA Regulated Deposit Taking SACCO</span>
+  </div>
+<div class="gold-rule"></div>
+
+<div class="content">
+  <div class="doc-title">LEGAL CLEARANCE MEMORANDUM</div>
+  <div class="doc-sub">
+    Legal Review &amp; Clearance
+  </div>
+  <hr class="navy-rule"/>
+
+  <!-- Clearance granted banner -->
+  <div class="clearance-granted">
+    <p>LEGAL CLEARANCE GRANTED ✓</p>
+    <span>All Conditions Precedent satisfied. Disbursement gate unlocked.
+      Reference: <span th:text="${clearanceRef}">LC-STIMA-LOS-2026-00009</span></span>
+  </div>
+
+  <!-- Meta -->
+  <table class="meta-table">
+    <tr><td class="ml">Clearance Reference:</td><td th:text="${clearanceRef}">LC-DIB-2026-00003</td></tr>
+    <tr><td class="ml">Application Reference:</td><td th:text="${applicationRef}">DIB-WAKALA-2026-00003</td></tr>
+    <tr><td class="ml">Clearance Date:</td><td th:text="${clearanceDate}">24 April 2026</td></tr>
+    <tr><td class="ml">Issued by:</td><td th:text="${legalOfficerName} + ' — Legal Officer, STIMA SACCO Society Limited'">Legal Officer</td></tr>
+    <tr><td class="ml">Classification:</td><td>CONFIDENTIAL</td></tr>
+  </table>
+
+  <!-- Application summary -->
+  <div class="section-heading">1. APPLICATION SUMMARY</div>
+  <table class="meta-table">
+    <tr><td class="ml">Customer:</td><td th:text="${customerName} + ' (' + ${cifNumber} + ')'">Patel Agro Industries Limited</td></tr>
+    <tr><td class="ml">Product:</td><td th:text="${productName}">Development Loan</td></tr>
+    <tr><td class="ml">Facility Amount:</td><td th:text="'KES ' + ${facilityAmount}">KES 60,000,000.00</td></tr>
+    <tr><td class="ml">Monthly Instalment:</td>
+        <td th:text="'KES ' + ${monthlyInstalment}">KES 6,600,000.00</td></tr>
+    <tr><td class="ml">Credit Score:</td><td th:text="${creditScore} + '/100 — ' + ${riskBand}">63/100 — Moderate Risk</td></tr>
+    <tr><td class="ml">Approval Stage:</td><td th:text="${approvalStage} + ' — ' + ${approvalDate}">BCC — 16 April 2026</td></tr>
+    <tr><td class="ml">Approving Officer:</td><td th:text="${approverName}">Fatuma Ochieng — Senior Credit Manager</td></tr>
+  </table>
+
+  <!-- Three-gate clearance -->
+  <div class="section-heading">2. THREE-GATE CLEARANCE SUMMARY</div>
+  <div class="gates">
+    <div class="gate gate-pass">
+      <div class="gate-label">GATE 1</div>
+      <div class="gate-label">DOCUMENTATION</div>
+      <div class="gate-status">PASSED ✓</div>
+    </div>
+    <div class="gate gate-pass">
+      <div class="gate-label">GATE 2</div>
+      <div class="gate-label">SECURITY PERFECTION</div>
+      <div class="gate-status">PASSED ✓</div>
+    </div>
+    <div class="gate gate-pass">
+      <div class="gate-label">GATE 3</div>
+      <div class="gate-label">INSURANCE</div>
+      <div class="gate-status">PASSED ✓</div>
+    </div>
+  </div>
+
+  <!-- CP table -->
+  <div class="section-heading">3. CONDITIONS PRECEDENT — SATISFACTION STATUS</div>
+  <table class="cp-table">
+    <tr>
+      <th style="width:8%">CP#</th>
+      <th style="width:35%">Description</th>
+      <th style="width:12%">Type</th>
+      <th style="width:28%">Evidence Reference</th>
+      <th style="width:10%">Date</th>
+      <th style="width:7%">Status</th>
+    </tr>
+    <tr th:each="cp : ${conditionsPrecedentStatus}">
+      <td th:text="${cp.number}">CP 1</td>
+      <td th:text="${cp.description}">Document description</td>
+      <td th:text="${cp.type}">Critical</td>
+      <td th:text="${cp.evidenceRef}">DMS-2026-XXX-001</td>
+      <td th:text="${cp.satisfiedDate}">20 Apr 2026</td>
+      <td class="status-sat" th:text="${cp.status}">SATISFIED</td>
+    </tr>
+  </table>
+
+  <!-- Security and collateral -->
+  <div class="section-heading">4. SECURITY PERFECTION</div>
+  <table class="meta-table">
+    <tr><td class="ml">Security Type:</td><td th:text="${collateralType}">Land — first legal charge</td></tr>
+    <tr><td class="ml">Description:</td><td th:text="${collateralDescription}">LR/MKS/4572, Athi River</td></tr>
+    <tr><td class="ml">Registration Type:</td><td>Registered Security / Charge Documentation</td></tr>
+    <tr><td class="ml">Registration Reference:</td><td th:text="${chargeRef}">KMC/LR/CH/2026/00441</td></tr>
+    <tr><td class="ml">Registration Date:</td><td th:text="${chargeDate}">22 April 2026</td></tr>
+    <tr><td class="ml">Collateral FSV:</td><td th:text="'KES ' + ${collateralFSV}">KES 91,200,000</td></tr>
+    <tr><td class="ml">Coverage Ratio:</td><td th:text="${coverageRatio}">1.52x — adequate</td></tr>
+  </table>
+
+  <hr class="gray-rule"/>
+
+  <div class="section-heading">5. GUARANTOR DETAILS</div>
+
+  <table class="meta-table">
+
+    <tr>
+      <th>Full Name</th>
+      <th>Member No</th>
+      <th>Mobile</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+
+    <tr th:each="guarantor : ${guarantors}">
+      <td th:text="${guarantor.fullName}">John Doe</td>
+      <td th:text="${guarantor.memberNumber}">MEM001</td>
+      <td th:text="${guarantor.mobileNumber}">0712345678</td>
+      <td th:text="${guarantor.guarantorAmount}">100000</td>
+      <td th:text="${guarantor.status}">ACTIVE</td>
+    </tr>
+
+  </table>
+
+  <!-- Insurance section — conditional label -->
+  <div class="section-heading">
+    6. INSURANCE VERIFICATION
+  </div>
+  <table class="meta-table">
+    <tr><td class="ml">Insurance Type:</td>
+      <td>
+        Comprehensive Insurance Coverage
+      </td></tr>
+    <tr><td class="ml">Insurer:</td><td th:text="${insurerName}">Takaful Insurance of Africa</td></tr>
+    <tr><td class="ml">Policy Number:</td><td th:text="${policyNumber}">TIA/2026/COM/04412</td></tr>
+    <tr><td class="ml">Insured Value:</td><td th:text="'KES ' + ${insuredValue}">KES 120,000,000</td></tr>
+    <tr><td class="ml">First Loss Payee:</td><td>STIMA SACCO Society Limited ✓</td></tr>
+    <tr><td class="ml">30-Day Cancellation Clause:</td><td>Confirmed present in policy ✓</td></tr>
+    <tr><td class="ml">Original Policy:</td><td th:text="'Received — ' + ${policyRef}">DMS-2026-PAI-INS-001</td></tr>
+  </table>
+
+  <!-- Narrative -->
+  <div class="section-heading">7. LEGAL OFFICER NARRATIVE</div>
+  <div th:each="para : ${legalNarrative}">
+    <p class="body" th:text="${para}">Narrative paragraph</p>
+  </div>
+
+  <!-- Disbursement instruction -->
+  <div class="section-heading">8. INSTRUCTION TO FINANCE AND DISBURSEMENT</div>
+  <div class="disb-box">
+    <p><strong>Disbursement Gate: UNLOCKED — All CPs satisfied</strong></p>
+    <p><strong>Payment Type:</strong>
+      <span>Member Account Disbursement</span>
+    </p>
+    <p><strong>Pay to:</strong> <span th:text="${customerName}">Member Name</span></p>
+    <p><strong>Bank / FOSA:</strong><span th:text="${borrowerBank}">STIMA SACCO FOSA</span></p>
+    <p><strong>Account Number:</strong><span th:text="${borrowerAccountNumber}">0102030405</span></p>
+
+    <p><strong>Amount:</strong> KES <span th:text="${facilityAmount}">60,000,000.00</span>
+       (net of facility fee KES <span th:text="${facilityFeeAmount}">600,000.00</span>)</p>
+    <p><strong>CBS Posting Description:</strong>
+      <span th:text="'LOAN DISBURSEMENT — ' + ${applicationRef}"></span>
+    </p>
+  </div>
+
+  <p class="body" style="color:#6B7280; font-size:8.5pt; margin-top:8px;">
+    This Legal Clearance Memorandum is permanently recorded in the TeraCMS immutable audit trail
+    under Legal Officer ID: <span th:text="${legalOfficerUsername}">mokeyo</span>.
+    Audit Event: LEGAL_CLEARANCE_ISSUED.
+  </p>
+
+  <table class="sig-table">
+    <tr>
+      <td>
+        <div class="sig-line"></div>
+        <div class="sig-name" th:text="${legalOfficerName}">M. Okeyo</div>
+        <div class="sig-role">Legal Officer — STIMA SACCO Society Limited</div>
+        <div class="sig-role" th:text="'Date: ' + ${clearanceDate}">Date: 24 April 2026</div>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="page-footer">
+  <div class="gold-top"></div>
+  <p th:text="'Legal Clearance Memo — ' + ${customerName} + ' — ' + ${clearanceRef}">Legal Clearance Memo</p>
+  <p>STIMA SACCO Society Limited | Nairobi, Kenya | www.stima-sacco.com</p>
+  <p>Classification: Confidential — STIMA SACCO Internal Use.</p>
+</div>
+</body>
+</html>

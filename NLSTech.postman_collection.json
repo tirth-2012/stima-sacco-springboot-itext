@@ -1,0 +1,2301 @@
+{
+  "info": {
+    "_postman_id": "46a08c4a-ff17-403e-9d95-9fffbcddb5a8",
+    "name": "NLSTech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32935610",
+    "_collection_link": "https://go.postman.co/collection/32935610-46a08c4a-ff17-403e-9d95-9fffbcddb5a8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User authentication",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"rpatel\",\n  \"password\": \"test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/users/authenticate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "users",
+            "authenticate"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "User authentication",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"rpatel\",\n  \"password\": \"test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/users/authenticate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "users",
+                "authenticate"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 20 Mar 2026 08:22:14 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"branchCode\": \"BRANCH_NRB\",\n    \"firstname\": \"Rahul\",\n    \"regionCode\": \"CENTRAL\",\n    \"groups\": [\n        {\n            \"id\": \"BM\",\n            \"revision\": 1,\n            \"originalPersistentState\": {\n                \"name\": \"Branch Manager\",\n                \"type\": \"assignment\"\n            },\n            \"name\": \"Branch Manager\",\n            \"type\": \"assignment\",\n            \"persistentState\": {\n                \"name\": \"Branch Manager\",\n                \"type\": \"assignment\"\n            },\n            \"inserted\": false,\n            \"idPrefix\": \"IDM-\",\n            \"deleted\": false,\n            \"updated\": false,\n            \"revisionNext\": 2\n        }\n    ],\n    \"userId\": \"rpatel\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA\",\n    \"lastname\": \"Patel\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Lists all products",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "products"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Lists all products",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "products"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 20 Mar 2026 08:23:54 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"productName\": \"Murabaha\",\n        \"description\": \"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Profit from 13.5% p.a.\",\n        \"createdAt\": \"2026-03-20T06:51:41.634024\",\n        \"updatedAt\": \"2026-03-20T06:51:41.634024\"\n    },\n    {\n        \"id\": 2,\n        \"productName\": \"Ijara\",\n        \"description\": \"Islamic lease. Bank purchases and leases to customer with transfer option.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Rental from 14.0% p.a.\",\n        \"createdAt\": \"2026-03-20T07:24:56.618985\",\n        \"updatedAt\": \"2026-03-20T07:24:56.618985\"\n    },\n    {\n        \"id\": 3,\n        \"productName\": \"Diminishing Musharaka\",\n        \"description\": \"Joint ownership with gradual transfer. Ideal for property finance.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Profit from 14.5% p.a.\",\n        \"createdAt\": \"2026-03-20T07:24:56.649773\",\n        \"updatedAt\": \"2026-03-20T07:24:56.649773\"\n    },\n    {\n        \"id\": 4,\n        \"productName\": \"Wakala\",\n        \"description\": \"Investment agency. Bank invests customer funds as agent.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Expected return from 12.0%\",\n        \"createdAt\": \"2026-03-20T07:24:56.655611\",\n        \"updatedAt\": \"2026-03-20T07:24:56.655611\"\n    },\n    {\n        \"id\": 5,\n        \"productName\": \"Bai Muajjal\",\n        \"description\": \"Deferred payment sale. Goods now, payment in future instalments.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Profit from 13.0% p.a.\",\n        \"createdAt\": \"2026-03-20T07:24:56.662248\",\n        \"updatedAt\": \"2026-03-20T07:24:56.662248\"\n    },\n    {\n        \"id\": 6,\n        \"productName\": \"Istisna'a\",\n        \"description\": \"Construction / manufacturing finance for assets to be built.\",\n        \"category\": \"Shariah Compliant\",\n        \"productType\": \"Islamic Financing Products\",\n        \"rateType\": \"Profit from 14.0% p.a.\",\n        \"createdAt\": \"2026-03-20T07:24:56.668231\",\n        \"updatedAt\": \"2026-03-20T07:24:56.668231\"\n    },\n    {\n        \"id\": 7,\n        \"productName\": \"Term Loan\",\n        \"description\": \"Fixed-term facility with regular repayments. SME, corporate, retail.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Interest from 16.0% p.a.\",\n        \"createdAt\": \"2026-03-20T07:38:34.966457\",\n        \"updatedAt\": \"2026-03-20T07:38:34.966457\"\n    },\n    {\n        \"id\": 8,\n        \"productName\": \"Overdraft Facility\",\n        \"description\": \"Revolving credit linked to current account. Flexible access.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Interest from 18.0% p.a.\",\n        \"createdAt\": \"2026-03-20T08:15:35.399296\",\n        \"updatedAt\": \"2026-03-20T08:15:35.399296\"\n    },\n    {\n        \"id\": 9,\n        \"productName\": \"Asset Finance (Conv.)\",\n        \"description\": \"Hire purchase for vehicles, equipment and machinery.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Interest from 15.5% p.a.\",\n        \"createdAt\": \"2026-03-20T08:15:35.421032\",\n        \"updatedAt\": \"2026-03-20T08:15:35.421032\"\n    },\n    {\n        \"id\": 10,\n        \"productName\": \"Mortgage Loan\",\n        \"description\": \"Residential and commercial property financing with title deed security.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Interest from 14.5% p.a.\",\n        \"createdAt\": \"2026-03-20T08:15:35.42421\",\n        \"updatedAt\": \"2026-03-20T08:15:35.42421\"\n    },\n    {\n        \"id\": 11,\n        \"productName\": \"Trade Finance\",\n        \"description\": \"LC, import/export financing, bonds and guarantees.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Commission from 1.5%\",\n        \"createdAt\": \"2026-03-20T08:15:35.427991\",\n        \"updatedAt\": \"2026-03-20T08:15:35.427991\"\n    },\n    {\n        \"id\": 12,\n        \"productName\": \"LPO / Invoice Finance\",\n        \"description\": \"Working capital against confirmed purchase orders or invoices.\",\n        \"category\": \"Conventional\",\n        \"productType\": \"Conventional Financing Products\",\n        \"rateType\": \"Interest from 17.0% p.a.\",\n        \"createdAt\": \"2026-03-20T08:18:54.06377\",\n        \"updatedAt\": \"2026-03-20T08:18:54.06377\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Start process_islamic_financial process",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  //Bio Data Information Tab  \n  \"requester\":\"rpatel\",\n  \"cif_number\":\"CIF2001\",\n  //Primary Identity Information: ??\n  \"fullname\": \"Sumit Vadaviya\",\n  \"gender\":\"Male\",\n  \"date_of_birth\":\"1990-01-01\",\n  \"loan_amount\": 70000,\n  \"national_id\": \"NID2001\",\n  \"kra_pin\":\"KRA2001\",\n  \"nationality\":\"keniyan\",\n  \"marital_status\":\"Married\",\n  \"physical_address\":\"Nairobi Industrial Area\",\n  \"postal_address\":\"P.O Box 1001-00100 Nairobi\",\n  \"mobile_number\":\"9834534534\",\n  \"email_id\":\"abc.123@gmail.com\",\n\n  //Islamic Product Structure Tab\n  \"product_name\":\"Murabaha\",\n  \"product_description\":\"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\",\n  \"financing_tenure\":10, //enter by user\n  \"payment_structure\":\"Monthly\", //Monthly, Bullet, Differ - enter by user\n  \"financing_amount\": 50000, // enter by user\n  \"cost_price\":125000, // enter by user\n  \"profit_rate\":12, // % enter by user\n  \"profit_amount\": 50000, // Auto calculated cost_price % profit_rate\n  \"total_sale_price\": 60000, // Auto calculated cost_price + profit_amount\n  \"monthly_installment\": 35000, // Auto calculated total_sale_price/financing_tenure\n\n  //Asset & Collateral Details Tab\n  \"collateral type\":\"Registered Land\",  //Registered Land, Motor Vehicle, Listed Securities, Cash Deposit, Guarantor, or None.  \n  \"asset_description\": \"Aggreculture 3 acres land\",\n  \"valuer_name\": \"Sumit Vadaviya\", //from fullname\n  \"valuation_date\":\"2026-01-01\",\n  \"estimated_market_value\": 50600000,\n  \"forced_sale_value\":6000000,\n  \"collateral_to_financing_ratio\": 345000, // forced_sale_value % loan_amount\n  \"asset_remark\":\"Title clear, all the documents ready\",\n\n  //Customer & Guarantor Tab\n  //Column 1: Entity Profile\n  \"guarantor_customer_id\": \"9823489345\",\n  \"guarantor_fullname\":\"Mohamed Al-Farsi\",\n  \"guarantor_national_id\": \"NID20023\",\n  \"guarantor_physical_address\":\"Nairobi Industrial Area\",\n  \"guarantor_mobile_number\":\"9834534534\",\n  \"guarantor_email_id\":\"abc.123@gmail.com\",\n  //Column 2: Economic Standing\n  \"employer_name\":\"Rutusoft IT Services LLP\",\n  \"gross_monthly_income\":50000,\n  \"net_monthly_incode\":40000,\n  \"existing_obligations\":5000,\n  //\"financing_amount\":50000 //linked to product\n   \"guarantor_status\": \"Active\" // Active , Pending\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/process-instances/start/process_islamic_financial_org",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "process-instances",
+            "start",
+            "process_islamic_financial_org"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Start process_islamic_financial process",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  //Bio Data Information Tab  \n  \"requester\":\"rpatel\",\n  \"cif_number\":\"CIF2001\",\n  //Primary Identity Information: ??\n  \"fullname\": \"Sumit Vadaviya\",\n  \"gender\":\"Male\",\n  \"date_of_birth\":\"1990-01-01\",\n  \"loan_amount\": 70000,\n  \"national_id\": \"NID2001\",\n  \"kra_pin\":\"KRA2001\",\n  \"nationality\":\"keniyan\",\n  \"marital_status\":\"Married\",\n  \"physical_address\":\"Nairobi Industrial Area\",\n  \"postal_address\":\"P.O Box 1001-00100 Nairobi\",\n  \"mobile_number\":\"9834534534\",\n  \"email_id\":\"abc.123@gmail.com\",\n\n  //Islamic Product Structure Tab\n  \"product_name\":\"Murabaha\",\n  \"product_description\":\"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\",\n  \"financing_tenure\":10, //enter by user\n  \"payment_structure\":\"Monthly\", //Monthly, Bullet, Differ - enter by user\n  \"financing_amount\": 50000, // enter by user\n  \"cost_price\":125000, // enter by user\n  \"profit_rate\":12, // % enter by user\n  \"profit_amount\": 50000, // Auto calculated cost_price % profit_rate\n  \"total_sale_price\": 60000, // Auto calculated cost_price + profit_amount\n  \"monthly_installment\": 35000, // Auto calculated total_sale_price/financing_tenure\n\n  //Asset & Collateral Details Tab\n  \"collateral type\":\"Registered Land\",  //Registered Land, Motor Vehicle, Listed Securities, Cash Deposit, Guarantor, or None.  \n  \"asset_description\": \"Aggreculture 3 acres land\",\n  \"valuer_name\": \"Sumit Vadaviya\", //from fullname\n  \"valuation_date\":\"2026-01-01\",\n  \"estimated_market_value\": 50600000,\n  \"forced_sale_value\":6000000,\n  \"collateral_to_financing_ratio\": 345000, // forced_sale_value % loan_amount\n  \"asset_remark\":\"Title clear, all the documents ready\",\n\n  //Customer & Guarantor Tab\n  //Column 1: Entity Profile\n  \"guarantor_customer_id\": \"9823489345\",\n  \"guarantor_fullname\":\"Mohamed Al-Farsi\",\n  \"guarantor_national_id\": \"NID20023\",\n  \"guarantor_physical_address\":\"Nairobi Industrial Area\",\n  \"guarantor_mobile_number\":\"9834534534\",\n  \"guarantor_email_id\":\"abc.123@gmail.com\",\n  //Column 2: Economic Standing\n  \"employer_name\":\"Rutusoft IT Services LLP\",\n  \"gross_monthly_income\":50000,\n  \"net_monthly_incode\":40000,\n  \"existing_obligations\":5000,\n  //\"financing_amount\":50000 //linked to product\n   \"guarantor_status\": \"Active\" // Active , Pending\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/process-instances/start/process_islamic_financial_org",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "process-instances",
+                "start",
+                "process_islamic_financial_org"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "36"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 23 Mar 2026 05:46:13 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "99da00c2-267b-11f1-b324-c247406d9200"
+        }
+      ]
+    },
+    {
+      "name": "List my active applications",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/process-instances/active/initiator/rpatel?from=0&to=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "process-instances",
+            "active",
+            "initiator",
+            "rpatel"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "to",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List my active applications",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/process-instances/active/initiator/rpatel?from=0&to=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "process-instances",
+                "active",
+                "initiator",
+                "rpatel"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "to",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 23 Mar 2026 05:48:42 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"processInstances\": [\n        {\n            \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n            \"processDefinitionId\": \"9a8071fe-243d-11f1-9f51-c247406d9200\",\n            \"processDefinitionName\": \"Process Islamic Financial Org\",\n            \"processDefinitionKey\": \"process_islamic_financial_org\",\n            \"version\": 1,\n            \"deploymentId\": \"9a338a78-243d-11f1-9f51-c247406d9200\",\n            \"businessKey\": null,\n            \"startUserId\": \"rpatel\",\n            \"startTime\": \"2026-03-23T05:46:12.922+00:00\",\n            \"endTime\": null,\n            \"processVariables\": [\n                {\n                    \"id\": \"99da75f4-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"requester\",\n                    \"typeName\": \"string\",\n                    \"value\": \"rpatel\"\n                },\n                {\n                    \"id\": \"99da9d05-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cif_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"CIF2001\"\n                },\n                {\n                    \"id\": \"99da9d06-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"99da9d07-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gender\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Male\"\n                },\n                {\n                    \"id\": \"99da9d08-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"date_of_birth\",\n                    \"typeName\": \"string\",\n                    \"value\": \"1990-01-01\"\n                },\n                {\n                    \"id\": \"99da9d09-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loan_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"99dac41a-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID2001\"\n                },\n                {\n                    \"id\": \"99dac41b-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"kra_pin\",\n                    \"typeName\": \"string\",\n                    \"value\": \"KRA2001\"\n                },\n                {\n                    \"id\": \"99dac41c-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"nationality\",\n                    \"typeName\": \"string\",\n                    \"value\": \"keniyan\"\n                },\n                {\n                    \"id\": \"99dac41d-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"marital_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Married\"\n                },\n                {\n                    \"id\": \"99dac41e-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"99dac41f-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"postal_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"P.O Box 1001-00100 Nairobi\"\n                },\n                {\n                    \"id\": \"99dac420-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"99daeb31-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"99daeb32-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Murabaha\"\n                },\n                {\n                    \"id\": \"99daeb33-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\"\n                },\n                {\n                    \"id\": \"99daeb34-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_tenure\",\n                    \"typeName\": \"integer\",\n                    \"value\": 10\n                },\n                {\n                    \"id\": \"99daeb35-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"payment_structure\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Monthly\"\n                },\n                {\n                    \"id\": \"99daeb36-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"99daeb37-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cost_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 125000\n                },\n                {\n                    \"id\": \"99daeb38-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_rate\",\n                    \"typeName\": \"integer\",\n                    \"value\": 12\n                },\n                {\n                    \"id\": \"99db1249-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"99db124a-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"total_sale_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 60000\n                },\n                {\n                    \"id\": \"99db124b-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"monthly_installment\",\n                    \"typeName\": \"integer\",\n                    \"value\": 35000\n                },\n                {\n                    \"id\": \"99db124c-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral type\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Registered Land\"\n                },\n                {\n                    \"id\": \"99db124d-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Aggreculture 3 acres land\"\n                },\n                {\n                    \"id\": \"99db124e-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"99db124f-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuation_date\",\n                    \"typeName\": \"string\",\n                    \"value\": \"2026-01-01\"\n                },\n                {\n                    \"id\": \"99db1250-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"estimated_market_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50600000\n                },\n                {\n                    \"id\": \"99db1251-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"forced_sale_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 6000000\n                },\n                {\n                    \"id\": \"99db1252-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral_to_financing_ratio\",\n                    \"typeName\": \"integer\",\n                    \"value\": 345000\n                },\n                {\n                    \"id\": \"99db3963-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_remark\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Title clear, all the documents ready\"\n                },\n                {\n                    \"id\": \"99db3964-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_customer_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9823489345\"\n                },\n                {\n                    \"id\": \"99db3965-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Mohamed Al-Farsi\"\n                },\n                {\n                    \"id\": \"99db3966-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID20023\"\n                },\n                {\n                    \"id\": \"99db3967-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"99db3968-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"99db3969-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"99db396a-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"employer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Rutusoft IT Services LLP\"\n                },\n                {\n                    \"id\": \"99db396b-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gross_monthly_income\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"99db607c-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"net_monthly_incode\",\n                    \"typeName\": \"integer\",\n                    \"value\": 40000\n                },\n                {\n                    \"id\": \"99db607d-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"existing_obligations\",\n                    \"typeName\": \"integer\",\n                    \"value\": 5000\n                },\n                {\n                    \"id\": \"99db607e-267b-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"99da00c2-267b-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Active\"\n                }\n            ],\n            \"ended\": false,\n            \"suspended\": false\n        },\n        {\n            \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n            \"processDefinitionId\": \"9a8071fe-243d-11f1-9f51-c247406d9200\",\n            \"processDefinitionName\": \"Process Islamic Financial Org\",\n            \"processDefinitionKey\": \"process_islamic_financial_org\",\n            \"version\": 1,\n            \"deploymentId\": \"9a338a78-243d-11f1-9f51-c247406d9200\",\n            \"businessKey\": null,\n            \"startUserId\": \"rpatel\",\n            \"startTime\": \"2026-03-23T05:21:40.661+00:00\",\n            \"endTime\": null,\n            \"processVariables\": [\n                {\n                    \"id\": \"2c5206c3-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cif_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"CIF2001\"\n                },\n                {\n                    \"id\": \"2c5206c4-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"2c527bf5-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gender\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Male\"\n                },\n                {\n                    \"id\": \"2c527bf6-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"date_of_birth\",\n                    \"typeName\": \"string\",\n                    \"value\": \"1990-01-01\"\n                },\n                {\n                    \"id\": \"2c527bf7-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loan_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"2c527bf8-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID2001\"\n                },\n                {\n                    \"id\": \"2c527bf9-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"kra_pin\",\n                    \"typeName\": \"string\",\n                    \"value\": \"KRA2001\"\n                },\n                {\n                    \"id\": \"2c527bfa-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"nationality\",\n                    \"typeName\": \"string\",\n                    \"value\": \"keniyan\"\n                },\n                {\n                    \"id\": \"2c527bfb-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"marital_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Married\"\n                },\n                {\n                    \"id\": \"2c527bfc-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"2c527bfd-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"postal_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"P.O Box 1001-00100 Nairobi\"\n                },\n                {\n                    \"id\": \"2c527bfe-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"2c527bff-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"2c52ca20-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Murabaha\"\n                },\n                {\n                    \"id\": \"2c52ca21-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\"\n                },\n                {\n                    \"id\": \"2c52ca22-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_tenure\",\n                    \"typeName\": \"integer\",\n                    \"value\": 10\n                },\n                {\n                    \"id\": \"2c52ca23-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"payment_structure\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Monthly\"\n                },\n                {\n                    \"id\": \"2c52ca24-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"2c52ca25-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cost_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 125000\n                },\n                {\n                    \"id\": \"2c52ca26-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_rate\",\n                    \"typeName\": \"integer\",\n                    \"value\": 12\n                },\n                {\n                    \"id\": \"2c52ca27-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"2c52ca28-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"total_sale_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 60000\n                },\n                {\n                    \"id\": \"2c52ca29-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"monthly_installment\",\n                    \"typeName\": \"integer\",\n                    \"value\": 35000\n                },\n                {\n                    \"id\": \"2c52ca2a-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral type\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Registered Land\"\n                },\n                {\n                    \"id\": \"2c52ca2b-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Aggreculture 3 acres land\"\n                },\n                {\n                    \"id\": \"2c52ca2c-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"2c52ca2d-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuation_date\",\n                    \"typeName\": \"string\",\n                    \"value\": \"2026-01-01\"\n                },\n                {\n                    \"id\": \"2c52ca2e-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"estimated_market_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50600000\n                },\n                {\n                    \"id\": \"2c52ca2f-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"forced_sale_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 6000000\n                },\n                {\n                    \"id\": \"2c52ca30-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral_to_financing_ratio\",\n                    \"typeName\": \"integer\",\n                    \"value\": 345000\n                },\n                {\n                    \"id\": \"2c52ca31-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_remark\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Title clear, all the documents ready\"\n                },\n                {\n                    \"id\": \"2c52ca32-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_customer_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9823489345\"\n                },\n                {\n                    \"id\": \"2c52ca33-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Mohamed Al-Farsi\"\n                },\n                {\n                    \"id\": \"2c52ca34-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID20023\"\n                },\n                {\n                    \"id\": \"2c52ca35-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"2c52ca36-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"2c52ca37-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"2c52ca38-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"employer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Rutusoft IT Services LLP\"\n                },\n                {\n                    \"id\": \"2c52f049-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gross_monthly_income\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"2c52f04a-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"net_monthly_incode\",\n                    \"typeName\": \"integer\",\n                    \"value\": 40000\n                },\n                {\n                    \"id\": \"2c52f04b-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"existing_obligations\",\n                    \"typeName\": \"integer\",\n                    \"value\": 5000\n                },\n                {\n                    \"id\": \"2c52f04c-2678-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"2c50a731-2678-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Active\"\n                }\n            ],\n            \"ended\": false,\n            \"suspended\": false\n        },\n        {\n            \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n            \"processDefinitionId\": \"9a8071fe-243d-11f1-9f51-c247406d9200\",\n            \"processDefinitionName\": \"Process Islamic Financial Org\",\n            \"processDefinitionKey\": \"process_islamic_financial_org\",\n            \"version\": 1,\n            \"deploymentId\": \"9a338a78-243d-11f1-9f51-c247406d9200\",\n            \"businessKey\": null,\n            \"startUserId\": \"rpatel\",\n            \"startTime\": \"2026-03-23T04:05:17.135+00:00\",\n            \"endTime\": null,\n            \"processVariables\": [\n                {\n                    \"id\": \"80534f3f-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cif_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"CIF2001\"\n                },\n                {\n                    \"id\": \"80539d60-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"80539d61-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gender\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Male\"\n                },\n                {\n                    \"id\": \"80539d62-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"date_of_birth\",\n                    \"typeName\": \"string\",\n                    \"value\": \"1990-01-01\"\n                },\n                {\n                    \"id\": \"8053c473-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loan_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"8053c474-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID2001\"\n                },\n                {\n                    \"id\": \"8053c475-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"kra_pin\",\n                    \"typeName\": \"string\",\n                    \"value\": \"KRA2001\"\n                },\n                {\n                    \"id\": \"8053c476-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"nationality\",\n                    \"typeName\": \"string\",\n                    \"value\": \"keniyan\"\n                },\n                {\n                    \"id\": \"8053c477-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"marital_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Married\"\n                },\n                {\n                    \"id\": \"8053c478-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"8053c479-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"postal_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"P.O Box 1001-00100 Nairobi\"\n                },\n                {\n                    \"id\": \"8053c47a-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"8053c47b-266d-11f1-b324-c247406d9200\",\n                    \"processInstanceId\": \"80523dcd-266d-11f1-b324-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                }\n            ],\n            \"ended\": false,\n            \"suspended\": false\n        },\n        {\n            \"processInstanceId\": \"da62fba6-2441-11f1-ab8c-c247406d9200\",\n            \"processDefinitionId\": \"9a8071fe-243d-11f1-9f51-c247406d9200\",\n            \"processDefinitionName\": \"Process Islamic Financial Org\",\n            \"processDefinitionKey\": \"process_islamic_financial_org\",\n            \"version\": 1,\n            \"deploymentId\": \"9a338a78-243d-11f1-9f51-c247406d9200\",\n            \"businessKey\": null,\n            \"startUserId\": \"rpatel\",\n            \"startTime\": \"2026-03-20T09:47:48.058+00:00\",\n            \"endTime\": null,\n            \"processVariables\": [\n                {\n                    \"id\": \"da6349c8-2441-11f1-ab8c-c247406d9200\",\n                    \"processInstanceId\": \"da62fba6-2441-11f1-ab8c-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"customerName\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"da6397e9-2441-11f1-ab8c-c247406d9200\",\n                    \"processInstanceId\": \"da62fba6-2441-11f1-ab8c-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loanAmount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"da6397ea-2441-11f1-ab8c-c247406d9200\",\n                    \"processInstanceId\": \"da62fba6-2441-11f1-ab8c-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"priority\",\n                    \"typeName\": \"boolean\",\n                    \"value\": true\n                }\n            ],\n            \"ended\": false,\n            \"suspended\": false\n        }\n    ],\n    \"from\": 0,\n    \"to\": 10,\n    \"total\": 4\n}"
+        }
+      ]
+    },
+    {
+      "name": "List my completed applications",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/historical-process-instances/completed/initiator/rpatel?from=0&to=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "historical-process-instances",
+            "completed",
+            "initiator",
+            "rpatel"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "to",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List my completed applications",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/historical-process-instances/completed/initiator/rpatel?from=0&to=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "historical-process-instances",
+                "completed",
+                "initiator",
+                "rpatel"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "to",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 23 Mar 2026 05:51:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"processInstances\": [],\n    \"from\": 0,\n    \"to\": 10,\n    \"total\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "List active group tasks for branch manager group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  \"FINANCE\" //BM, CREDIT_ANALYST, SHARIAH_OFFICER, BRANCH_CREDIT_COMMITTEE, LEGAL_OFFICER, FINANCE, DISBURSEMENT_OFFICER\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/active/candidate-group?from=0&to=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "active",
+            "candidate-group"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "to",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List active group tasks for branch manager group",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"BM\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/active/candidate-group?from=0&to=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "active",
+                "candidate-group"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "to",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 07:55:31 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"taskInstances\": [\n        {\n            \"id\": \"f9c57777-2754-11f1-aa5b-c247406d9200\",\n            \"name\": \"Branch Manager\",\n            \"taskDefinitionId\": null,\n            \"taskDefinitionKey\": \"usertask_branch_manager\",\n            \"category\": null,\n            \"description\": \"Review the submitted case at branch level.\",\n            \"owner\": null,\n            \"priority\": 50,\n            \"assignee\": null,\n            \"groups\": [\n                {\n                    \"groupId\": \"BM\",\n                    \"name\": \"Branch Manager\"\n                }\n            ],\n            \"createTime\": \"2026-03-24T07:42:14.637+00:00\",\n            \"claimTime\": null,\n            \"dueTime\": null,\n            \"endTime\": null,\n            \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n            \"tenantId\": \"\",\n            \"status\": \"Ready for Pickup\",\n            \"processVariables\": [\n                {\n                    \"id\": \"f9c1f4d2-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"requester\",\n                    \"typeName\": \"string\",\n                    \"value\": \"rpatel\"\n                },\n                {\n                    \"id\": \"f9c21be3-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cif_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"CIF2001\"\n                },\n                {\n                    \"id\": \"f9c21be4-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"f9c21be5-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gender\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Male\"\n                },\n                {\n                    \"id\": \"f9c21be6-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"date_of_birth\",\n                    \"typeName\": \"string\",\n                    \"value\": \"1990-01-01\"\n                },\n                {\n                    \"id\": \"f9c21be7-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loan_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"f9c242f8-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID2001\"\n                },\n                {\n                    \"id\": \"f9c242f9-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"kra_pin\",\n                    \"typeName\": \"string\",\n                    \"value\": \"KRA2001\"\n                },\n                {\n                    \"id\": \"f9c242fa-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"nationality\",\n                    \"typeName\": \"string\",\n                    \"value\": \"keniyan\"\n                },\n                {\n                    \"id\": \"f9c242fb-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"marital_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Married\"\n                },\n                {\n                    \"id\": \"f9c242fc-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"f9c242fd-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"postal_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"P.O Box 1001-00100 Nairobi\"\n                },\n                {\n                    \"id\": \"f9c242fe-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"f9c242ff-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"f9c24300-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Murabaha\"\n                },\n                {\n                    \"id\": \"f9c24301-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\"\n                },\n                {\n                    \"id\": \"f9c24302-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_tenure\",\n                    \"typeName\": \"integer\",\n                    \"value\": 10\n                },\n                {\n                    \"id\": \"f9c24303-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"payment_structure\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Monthly\"\n                },\n                {\n                    \"id\": \"f9c24304-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a15-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cost_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 125000\n                },\n                {\n                    \"id\": \"f9c26a16-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_rate\",\n                    \"typeName\": \"integer\",\n                    \"value\": 12\n                },\n                {\n                    \"id\": \"f9c26a17-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a18-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"total_sale_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 60000\n                },\n                {\n                    \"id\": \"f9c26a19-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"monthly_installment\",\n                    \"typeName\": \"integer\",\n                    \"value\": 35000\n                },\n                {\n                    \"id\": \"f9c26a1a-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral type\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Registered Land\"\n                },\n                {\n                    \"id\": \"f9c26a1b-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Aggreculture 3 acres land\"\n                },\n                {\n                    \"id\": \"f9c26a1c-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"f9c26a1d-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuation_date\",\n                    \"typeName\": \"string\",\n                    \"value\": \"2026-01-01\"\n                },\n                {\n                    \"id\": \"f9c26a1e-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"estimated_market_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50600000\n                },\n                {\n                    \"id\": \"f9c26a1f-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"forced_sale_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 6000000\n                },\n                {\n                    \"id\": \"f9c26a20-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral_to_financing_ratio\",\n                    \"typeName\": \"integer\",\n                    \"value\": 345000\n                },\n                {\n                    \"id\": \"f9c26a21-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_remark\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Title clear, all the documents ready\"\n                },\n                {\n                    \"id\": \"f9c26a22-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_customer_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9823489345\"\n                },\n                {\n                    \"id\": \"f9c26a23-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Mohamed Al-Farsi\"\n                },\n                {\n                    \"id\": \"f9c26a24-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID20023\"\n                },\n                {\n                    \"id\": \"f9c26a25-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"f9c26a26-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"f9c26a27-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"f9c26a28-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"employer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Rutusoft IT Services LLP\"\n                },\n                {\n                    \"id\": \"f9c26a29-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gross_monthly_income\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a2a-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"net_monthly_incode\",\n                    \"typeName\": \"integer\",\n                    \"value\": 40000\n                },\n                {\n                    \"id\": \"f9c2913b-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"existing_obligations\",\n                    \"typeName\": \"integer\",\n                    \"value\": 5000\n                },\n                {\n                    \"id\": \"f9c2913c-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Active\"\n                },\n                {\n                    \"id\": \"f9c2913d-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"referenceId\",\n                    \"typeName\": \"string\",\n                    \"value\": \"DIB-Murabaha-2026-00003\"\n                },\n                {\n                    \"id\": \"f9c4db32-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"currentStage\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Branch Manager\"\n                }\n            ],\n            \"taskLocalVariables\": null\n        }\n    ],\n    \"from\": 0,\n    \"to\": 10,\n    \"total\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Claim task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2Fwb29yIiwiZXhwIjoxNzc1MjA1MjE3fQ.3V9fgTxGbhXnzH2SJWPFR4Moo6ENxRcjsnivR0uVX9C9irGKvk12CLkk4JwkUSqUwW81PkEZu86ds-VJDwmlGg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/77ab780c-2757-11f1-aa5b-c247406d9200/assignee/akapoor/claim",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "77ab780c-2757-11f1-aa5b-c247406d9200",
+            "assignee",
+            "akapoor",
+            "claim"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Claim task",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/385ef705-275f-11f1-b75a-c247406d9200/assignee/kjoshi/claim",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "385ef705-275f-11f1-b75a-c247406d9200",
+                "assignee",
+                "kjoshi",
+                "claim"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "25"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 09:07:15 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task claimed successfully"
+        }
+      ]
+    },
+    {
+      "name": "List active task by user",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2Fwb29yIiwiZXhwIjoxNzc1MjA1MjE3fQ.3V9fgTxGbhXnzH2SJWPFR4Moo6ENxRcjsnivR0uVX9C9irGKvk12CLkk4JwkUSqUwW81PkEZu86ds-VJDwmlGg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/active/assignee/akapoor?from=0&to=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "active",
+            "assignee",
+            "akapoor"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "to",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List active task by user",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/active/assignee/akapoor?from=0&to=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "active",
+                "assignee",
+                "akapoor"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "to",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 08:54:00 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"taskInstances\": [\n        {\n            \"id\": \"77ab780c-2757-11f1-aa5b-c247406d9200\",\n            \"name\": \"Risk Credit Analyst\",\n            \"taskDefinitionId\": null,\n            \"taskDefinitionKey\": \"usertask_risk_credit_analyst\",\n            \"category\": null,\n            \"description\": \"Perform credit and risk evaluation.\",\n            \"owner\": null,\n            \"priority\": 50,\n            \"assignee\": \"akapoor\",\n            \"groups\": [\n                {\n                    \"groupId\": \"CREDIT_ANALYST\",\n                    \"name\": \"Risk Credit Analyst\"\n                }\n            ],\n            \"createTime\": \"2026-03-24T08:00:04.856+00:00\",\n            \"claimTime\": \"2026-03-24T08:45:53.961+00:00\",\n            \"dueTime\": null,\n            \"endTime\": null,\n            \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n            \"tenantId\": \"\",\n            \"status\": \"In progress\",\n            \"processVariables\": [\n                {\n                    \"id\": \"77a5f9c5-2757-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"BM_review_comment\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Review comment\"\n                },\n                {\n                    \"id\": \"77a620d6-2757-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"BM_approval_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Approved\"\n                },\n                {\n                    \"id\": \"f9c1f4d2-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"requester\",\n                    \"typeName\": \"string\",\n                    \"value\": \"rpatel\"\n                },\n                {\n                    \"id\": \"f9c21be3-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cif_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"CIF2001\"\n                },\n                {\n                    \"id\": \"f9c21be4-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"f9c21be5-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gender\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Male\"\n                },\n                {\n                    \"id\": \"f9c21be6-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"date_of_birth\",\n                    \"typeName\": \"string\",\n                    \"value\": \"1990-01-01\"\n                },\n                {\n                    \"id\": \"f9c21be7-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"loan_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 70000\n                },\n                {\n                    \"id\": \"f9c242f8-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID2001\"\n                },\n                {\n                    \"id\": \"f9c242f9-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"kra_pin\",\n                    \"typeName\": \"string\",\n                    \"value\": \"KRA2001\"\n                },\n                {\n                    \"id\": \"f9c242fa-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"nationality\",\n                    \"typeName\": \"string\",\n                    \"value\": \"keniyan\"\n                },\n                {\n                    \"id\": \"f9c242fb-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"marital_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Married\"\n                },\n                {\n                    \"id\": \"f9c242fc-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"f9c242fd-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"postal_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"P.O Box 1001-00100 Nairobi\"\n                },\n                {\n                    \"id\": \"f9c242fe-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"f9c242ff-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"f9c24300-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Murabaha\"\n                },\n                {\n                    \"id\": \"f9c24301-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"product_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Cost-plus sale. Bank buys asset and sells at declared profit. No interest.\"\n                },\n                {\n                    \"id\": \"f9c24302-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_tenure\",\n                    \"typeName\": \"integer\",\n                    \"value\": 10\n                },\n                {\n                    \"id\": \"f9c24303-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"payment_structure\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Monthly\"\n                },\n                {\n                    \"id\": \"f9c24304-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"financing_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a15-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"cost_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 125000\n                },\n                {\n                    \"id\": \"f9c26a16-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_rate\",\n                    \"typeName\": \"integer\",\n                    \"value\": 12\n                },\n                {\n                    \"id\": \"f9c26a17-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"profit_amount\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a18-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"total_sale_price\",\n                    \"typeName\": \"integer\",\n                    \"value\": 60000\n                },\n                {\n                    \"id\": \"f9c26a19-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"monthly_installment\",\n                    \"typeName\": \"integer\",\n                    \"value\": 35000\n                },\n                {\n                    \"id\": \"f9c26a1a-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral type\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Registered Land\"\n                },\n                {\n                    \"id\": \"f9c26a1b-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_description\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Aggreculture 3 acres land\"\n                },\n                {\n                    \"id\": \"f9c26a1c-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Sumit Vadaviya\"\n                },\n                {\n                    \"id\": \"f9c26a1d-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"valuation_date\",\n                    \"typeName\": \"string\",\n                    \"value\": \"2026-01-01\"\n                },\n                {\n                    \"id\": \"f9c26a1e-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"estimated_market_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50600000\n                },\n                {\n                    \"id\": \"f9c26a1f-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"forced_sale_value\",\n                    \"typeName\": \"integer\",\n                    \"value\": 6000000\n                },\n                {\n                    \"id\": \"f9c26a20-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"collateral_to_financing_ratio\",\n                    \"typeName\": \"integer\",\n                    \"value\": 345000\n                },\n                {\n                    \"id\": \"f9c26a21-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"asset_remark\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Title clear, all the documents ready\"\n                },\n                {\n                    \"id\": \"f9c26a22-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_customer_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9823489345\"\n                },\n                {\n                    \"id\": \"f9c26a23-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_fullname\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Mohamed Al-Farsi\"\n                },\n                {\n                    \"id\": \"f9c26a24-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_national_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"NID20023\"\n                },\n                {\n                    \"id\": \"f9c26a25-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_physical_address\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Nairobi Industrial Area\"\n                },\n                {\n                    \"id\": \"f9c26a26-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_mobile_number\",\n                    \"typeName\": \"string\",\n                    \"value\": \"9834534534\"\n                },\n                {\n                    \"id\": \"f9c26a27-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_email_id\",\n                    \"typeName\": \"string\",\n                    \"value\": \"abc.123@gmail.com\"\n                },\n                {\n                    \"id\": \"f9c26a28-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"employer_name\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Rutusoft IT Services LLP\"\n                },\n                {\n                    \"id\": \"f9c26a29-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"gross_monthly_income\",\n                    \"typeName\": \"integer\",\n                    \"value\": 50000\n                },\n                {\n                    \"id\": \"f9c26a2a-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"net_monthly_incode\",\n                    \"typeName\": \"integer\",\n                    \"value\": 40000\n                },\n                {\n                    \"id\": \"f9c2913b-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"existing_obligations\",\n                    \"typeName\": \"integer\",\n                    \"value\": 5000\n                },\n                {\n                    \"id\": \"f9c2913c-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"guarantor_status\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Active\"\n                },\n                {\n                    \"id\": \"f9c2913d-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"referenceId\",\n                    \"typeName\": \"string\",\n                    \"value\": \"DIB-Murabaha-2026-00003\"\n                },\n                {\n                    \"id\": \"f9c4db32-2754-11f1-aa5b-c247406d9200\",\n                    \"processInstanceId\": \"f9c1a6b0-2754-11f1-aa5b-c247406d9200\",\n                    \"processDefinitionId\": null,\n                    \"name\": \"currentStage\",\n                    \"typeName\": \"string\",\n                    \"value\": \"Risk Credit Analyst\"\n                }\n            ],\n            \"taskLocalVariables\": null\n        }\n    ],\n    \"from\": 0,\n    \"to\": 10,\n    \"total\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Branch Manager",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/77ab780c-2757-11f1-aa5b-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "77ab780c-2757-11f1-aa5b-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Complete task - Branch Manager",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzUyMDI3ODZ9.A0xzkWs1SkDT-RPVo0x2cFOCSu6VM7OttM2ZVSRp5AspoO7otRp_0tOEq26Q-VaMZKNLzhvVOn2h6NY9iojPKA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/77ab780c-2757-11f1-aa5b-c247406d9200/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "77ab780c-2757-11f1-aa5b-c247406d9200",
+                "complete"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 08:55:34 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task completed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Shariah Officer ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/77ab780c-2757-11f1-aa5b-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "77ab780c-2757-11f1-aa5b-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Complete task - Shariah Officer",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/385ef705-275f-11f1-b75a-c247406d9200/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "385ef705-275f-11f1-b75a-c247406d9200",
+                "complete"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 09:07:51 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task completed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Branch Credit Committee",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/ef7c2414-2760-11f1-b2d6-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "ef7c2414-2760-11f1-b2d6-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Complete task - Branch Credit Committee",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/ef7c2414-2760-11f1-b2d6-c247406d9200/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "ef7c2414-2760-11f1-b2d6-c247406d9200",
+                "complete"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 09:12:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task completed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Legal Verification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/ef7c2414-2760-11f1-b2d6-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "ef7c2414-2760-11f1-b2d6-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Complete task - Legal Verification",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/998d960c-2761-11f1-b2d6-c247406d9200/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "998d960c-2761-11f1-b2d6-c247406d9200",
+                "complete"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 09:15:14 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task completed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Finance Processing",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/f7936914-2761-11f1-b2d6-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "f7936914-2761-11f1-b2d6-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Complete task - Finance Processing",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8098/flowable-service/tasks/f7936914-2761-11f1-b2d6-c247406d9200/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8098",
+              "path": [
+                "flowable-service",
+                "tasks",
+                "f7936914-2761-11f1-b2d6-c247406d9200",
+                "complete"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Max-Age",
+              "value": "3600"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "authorization, content-type, xsrf-token"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "xsrf-token"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Mar 2026 09:17:12 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "Task completed successfully"
+        }
+      ]
+    },
+    {
+      "name": "Complete task - Disbursement",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycGF0ZWwiLCJleHAiOjE3NzQ4NTg5MzR9.nFYLFPBJ43dnSsAf5UL2dqKpdUMYiz4-N6sQEoSx_KrUfFEz3zQPvTm8aO9FhOWF0csFsT4JAYa3x_aM_73ywA"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE; FLOWABLE_REMEMBER_ME=blQ2bGxOd083OTlDcVBDdXJnNzZJQSUzRCUzRDpUVVB2OXFld3lUdWNieVZuVDRubjBBJTNEJTNE"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \n    \"BM_review_comment\":\"Review comment\",\n    \"BM_approval_status\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8098/flowable-service/tasks/f7936914-2761-11f1-b2d6-c247406d9200/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8098",
+          "path": [
+            "flowable-service",
+            "tasks",
+            "f7936914-2761-11f1-b2d6-c247406d9200",
+            "complete"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

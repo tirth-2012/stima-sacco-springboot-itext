@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Guarantor Approval Request</title>
+
+  <style>
+
+    body {
+        background-color: #f4f6f9;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        color: #333333;
+    }
+
+    .container {
+        max-width: 800px;
+        background: #ffffff;
+        margin: auto;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #dddddd;
+    }
+
+    .header {
+        background: #1f2937;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .section-title {
+        margin-top: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #1f2937;
+        border-left: 4px solid #2563eb;
+        padding-left: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    td:first-child {
+        font-weight: bold;
+        width: 40%;
+    }
+
+    .amount {
+        color: #065f46;
+        font-weight: bold;
+    }
+
+    .notice {
+        margin-top: 20px;
+        background: #fef3c7;
+        padding: 15px;
+        border-radius: 6px;
+        color: #92400e;
+        font-size: 14px;
+    }
+
+    .btn-container {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .btn {
+        background: #2563eb;
+        color: white !important;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .footer {
+        padding: 20px;
+        background: #f3f4f6;
+        text-align: center;
+        color: #6b7280;
+        font-size: 12px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    Guarantor Approval Request
+  </div>
+
+  <div class="content">
+
+    <p>Dear <strong th:text="${guarantorName}"></strong>,</p>
+
+    <p>
+      You have been listed as a guarantor for the following financing request.
+      Kindly review the financing details below carefully.
+    </p>
+
+    <div class="section-title">Applicant Details</div>
+
+    <table>
+      <tr>
+        <td>Applicant Name</td>
+        <td th:text="${fullName}"></td>
+      </tr>
+
+      <tr>
+        <td>Applicant Email</td>
+        <td th:text="${email}"></td>
+      </tr>
+
+      <tr>
+        <td>Applicant ID</td>
+        <td th:text="${applicant_username}"></td>
+      </tr>
+
+      <tr>
+        <td>Mobile Number</td>
+        <td th:text="${mobile}"></td>
+      </tr>
+    </table>
+
+    <div class="section-title">Financing Details</div>
+
+    <table>
+
+      <tr>
+        <td>Product Name</td>
+        <td th:text="${productName}"></td>
+      </tr>
+
+      <tr>
+        <td>Loan Amount</td>
+        <td class="amount">
+          KSH <span th:text="${loanAmount}"></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Monthly Installment</td>
+        <td class="amount">
+          KSH <span th:text="${monthlyInstallment}"></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Profit Rate</td>
+        <td th:text="${profitRate}"></td>
+      </tr>
+
+    </table>
+
+    <div class="section-title">Guarantor Details</div>
+
+    <table>
+
+      <tr>
+        <td>Guarantor Member Number</td>
+        <td th:text="${guarantorMemberNumber}"></td>
+      </tr>
+
+      <tr>
+        <td>Guarantor Name</td>
+        <td th:text="${guarantorName}"></td>
+      </tr>
+
+      <tr>
+        <td>Guarantor Email</td>
+        <td th:text="${guarantorEmail}"></td>
+      </tr>
+
+      <tr>
+        <td>Guarantor Mobile</td>
+        <td th:text="${guarantorMobile}"></td>
+      </tr>
+
+      <tr>
+        <td>Guarantee Amount</td>
+        <td class="amount">
+          KSH <span th:text="${guaranteeAmount}"></span>
+        </td>
+      </tr>
+
+    </table>
+
+    <div class="notice">
+      Kindly review the financing request and confirm whether you ACCEPT or DECLINE
+      acting as guarantor by using the button below.
+    </div>
+
+    <div class="btn-container">
+      <a th:href="${viewLink}" class="btn">
+        Review Guarantor Consent
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 Stima SACCO • SASRA-Regulated
+  </div>
+
+</div>
+
+</body>
+</html>

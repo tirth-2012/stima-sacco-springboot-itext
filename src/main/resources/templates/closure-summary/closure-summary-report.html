@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 10pt; color: #0F172A; line-height: 1.55; }
+  .page-header { background-color: #1B3A6B; padding: 10px 28px; }
+  .page-header .bank-name { color: #FFFFFF; font-size: 12pt; font-weight: bold; display: block; }
+  .page-header .bank-sub { color: #C9A24A; font-size: 7.5pt; display: block; margin-top: 2px; }
+  .gold-rule { height: 3px; background-color: #C9A24A; }
+  .shariah-banner {
+    background-color: #FEFCE8; border: 1.5px solid #F59E0B;
+    padding: 7px 14px; margin: 12px 28px 0 28px;
+    font-size: 9pt; color: #92400E;
+  }
+  .content { padding: 16px 28px 20px 28px; }
+  .doc-title { font-size: 15pt; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .doc-sub { font-size: 9pt; color: #6B7280; text-align: center; margin-bottom: 10px; }
+  .navy-rule { border: none; border-top: 1.5px solid #1B3A6B; margin: 10px 0; }
+  .gray-rule { border: none; border-top: 0.5px solid #E5E7EB; margin: 10px 0; }
+  .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .ref-table td { padding: 2px 0; font-size: 9.5pt; vertical-align: top; }
+  .ref-table td.rl { font-weight: bold; color: #6B7280; width: 130px; }
+  .clause-num { font-weight: bold; color: #1B3A6B; font-size: 10pt; margin-top: 12px; margin-bottom: 3px; }
+  p.body { text-align: justify; margin-bottom: 6px; font-size: 9.5pt; line-height: 1.55; }
+  .terms-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; }
+  .terms-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .terms-table td { padding: 4px 8px; border-bottom: 0.5px solid #E5E7EB; vertical-align: top; }
+  .terms-table td.tl { font-weight: bold; color: #6B7280; width: 40%; }
+  .sched-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.5pt; }
+  .sched-table th { background: #1B3A6B; color: #fff; padding: 4px 8px; }
+  .sched-table tr:nth-child(odd) td { background: #F9FAFB; }
+  .sched-table tr:last-child td { background: #DBEAFE; font-weight: bold; }
+  .sched-table td { padding: 3px 8px; border-bottom: 0.5px solid #E5E7EB; text-align: right; }
+  .sched-table td:first-child { text-align: left; }
+  ol.alpha { list-style-type: lower-alpha; padding-left: 22px; margin: 5px 0; }
+  ol.roman { list-style-type: lower-roman; padding-left: 22px; margin: 5px 0; }
+  ol li { margin-bottom: 4px; font-size: 9.5pt; text-align: justify; }
+  .sig-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .sig-table td { width: 50%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; }
+  .sig-line { border-bottom: 1px solid #374151; width: 210px; height: 24px; margin-bottom: 4px; }
+  .sig-name { font-weight: bold; }
+  .sig-role { color: #6B7280; }
+  .sig-date { color: #9CA3AF; margin-top: 3px; }
+  .ssb-box { background: #FEFCE8; border: 1px solid #F59E0B; padding: 8px 12px; margin-top: 14px; font-size: 9pt; color: #92400E; }
+  .page-footer { background-color: #1B3A6B; padding: 6px 28px; margin-top: 20px; text-align: center; }
+  .page-footer p { color: #FFFFFF; font-size: 7pt; margin: 1px 0; }
+  .page-footer .gold-top { height: 2px; background-color: #C9A24A; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="bank-name">DIB BANK KENYA LIMITED</span>
+  <span class="bank-sub">A Subsidiary of Dubai Islamic Bank PJSC &#160;|&#160; Regulated by the Central Bank of Kenya</span>
+</div>
+<div class="gold-rule"></div>
+
+<!-- Shariah banner — Islamic only -->
+<div class="shariah-banner" th:if="${productCategory == 'ISLAMIC'}">
+  <strong>SHARIAH COMPLIANCE:</strong> This Facility Agreement is structured under Islamic Wakala financing principles,
+  approved by the DIB Bank Kenya Limited Shariah Supervisory Board
+  (Ref: <span th:text="${shariahApprovalRef}">SAB-DIB-2026-004</span>).
+  No interest (Riba) is charged. The Bank's return is a fixed profit amount agreed at contracting.
+</div>
+
+<div class="content">
+
+  <!-- Dynamic title based on product -->
+  <div class="doc-title"
+       th:text="${productCategory == 'ISLAMIC'} ? 'FACILITY AGREEMENT (WAKALA TERMS)' : 'TERM LOAN FACILITY AGREEMENT'">
+    FACILITY AGREEMENT
+  </div>
+  <div class="doc-sub"
+       th:text="${productCategory == 'ISLAMIC'} ? 'Islamic Financing — Wakala Structure' : 'SME Term Loan — Conventional'">
+    Product Type
+  </div>
+  <hr class="navy-rule"/>
+
+  <table class="ref-table">
+    <tr><td class="rl">Agreement Ref:</td><td th:text="${applicationRef} + '-FA-v1.0'">DIB-WAKALA-2026-00003-FA-v1.0</td></tr>
+    <tr><td class="rl">Date:</td><td th:text="${agreementDate}">16 April 2026</td></tr>
+    <tr><td class="rl">Classification:</td><td>CONFIDENTIAL — Credit Risk Use Only</td></tr>
+  </table>
+
+  <div class="clause-num">PARTIES</div>
+  <p class="body">
+    <strong>THE BANK:</strong> DIB Bank Kenya Limited, incorporated in Kenya, licensed by the
+    Central Bank of Kenya (Licence No. NBK/2012/017), Upper Hill, Nairobi ("the Bank").
+  </p>
+  <p class="body">
+    <strong>THE BORROWER:</strong> <span th:text="${customerName}">Patel Agro Industries Limited</span>,
+    Company No. <span th:text="${companyRegNo}">CPR/2017/084571</span>,
+    <span th:text="${customerAddress}">P.O. Box 4572, Athi River, Kenya</span> ("the Borrower").
+  </p>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">1. THE FACILITY</div>
+  <table class="terms-table">
+    <!-- Islamic terms -->
+    <th:block th:if="${productCategory == 'ISLAMIC'}">
+      <tr><td class="tl">Facility Structure:</td><td>Wakala (Agency) Financing — Shariah Compliant</td></tr>
+      <tr><td class="tl">Asset Cost Price:</td><td th:text="'KES ' + ${facilityAmount}">KES 60,000,000.00</td></tr>
+      <tr><td class="tl">Fixed Profit Amount:</td><td th:text="'KES ' + ${profitAmount} + ' (fixed at contracting — not variable)'">KES 6,000,000.00</td></tr>
+      <tr><td class="tl">Total Sale Price:</td><td th:text="'KES ' + ${totalSalePrice}">KES 66,000,000.00</td></tr>
+      <tr><td class="tl">Monthly Instalment:</td><td th:text="'KES ' + ${monthlyInstalment} + ' — equal for all ' + ${tenorMonths} + ' months'">KES 6,600,000.00</td></tr>
+      <tr><td class="tl">Tenor:</td><td th:text="${tenorMonths} + ' months'">10 months</td></tr>
+      <tr><td class="tl">First Instalment:</td><td th:text="${firstInstalmentDate}">31 May 2026</td></tr>
+      <tr><td class="tl">Shariah Approval:</td><td th:text="${shariahApprovalRef} + ' — ' + ${shariahApprovalDate}">SAB-DIB-2026-004</td></tr>
+      <tr><td class="tl">Disbursement:</td><td>Direct to Supplier — <span th:text="${supplierName}">Alphaline Solutions Limited</span></td></tr>
+    </th:block>
+    <!-- Conventional terms -->
+    <th:block th:if="${productCategory == 'CONVENTIONAL'}">
+      <tr><td class="tl">Facility Structure:</td><td>SME Term Loan — Reducing Balance Interest</td></tr>
+      <tr><td class="tl">Facility Amount:</td><td th:text="'KES ' + ${facilityAmount}">KES 5,000,000.00</td></tr>
+      <tr><td class="tl">Interest Rate:</td><td th:text="${interestRate} + '% per annum — reducing balance'">14.5% per annum</td></tr>
+      <tr><td class="tl">Monthly Instalment:</td><td th:text="'KES ' + ${monthlyInstalment}">KES 171,760.00</td></tr>
+      <tr><td class="tl">Total Interest Payable:</td><td th:text="'KES ' + ${totalInterest}">KES 1,183,360.00</td></tr>
+      <tr><td class="tl">Total Amount Repayable:</td><td th:text="'KES ' + ${totalRepayable}">KES 6,183,360.00</td></tr>
+      <tr><td class="tl">Tenor:</td><td th:text="${tenorMonths} + ' months'">36 months</td></tr>
+      <tr><td class="tl">First Instalment:</td><td th:text="${firstInstalmentDate}">31 May 2026</td></tr>
+      <tr><td class="tl">Disbursement:</td><td>To Borrower account — <span th:text="${borrowerBankName}">Co-operative Bank Kenya</span></td></tr>
+    </th:block>
+  </table>
+
+  <!-- Islamic profit note -->
+  <p class="body" th:if="${productCategory == 'ISLAMIC'}">
+    The profit amount is fixed and shall not vary regardless of any changes in market conditions.
+    No interest (Riba), compounding, or additional mark-up shall apply. Each monthly instalment is
+    equal for all <span th:text="${tenorMonths}">ten</span> months.
+  </p>
+
+  <!-- Conventional interest rate note -->
+  <p class="body" th:if="${productCategory == 'CONVENTIONAL'}">
+    Interest shall accrue on a reducing balance basis. The Bank reserves the right to revise the
+    interest rate on thirty (30) days prior written notice. Default interest of 3% per month
+    applies on any overdue instalment from date of default.
+  </p>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">2. REPAYMENT SCHEDULE (Sample — First 6 Months)</div>
+  <table class="sched-table">
+    <tr>
+      <th>Month</th><th>Due Date</th><th>Instalment (KES)</th>
+      <th th:text="${productCategory == 'ISLAMIC'} ? 'Profit (KES)' : 'Interest (KES)'">Interest</th>
+      <th>Principal (KES)</th><th>Balance (KES)</th>
+    </tr>
+    <tr th:each="row : ${repaymentSchedule}">
+      <td th:text="${row.month}">1</td>
+      <td th:text="${row.dueDate}">31 May 2026</td>
+      <td th:text="${row.instalment}">171,760</td>
+      <td th:text="${row.interestOrProfit}">60,417</td>
+      <td th:text="${row.principal}">111,343</td>
+      <td th:text="${row.balance}">4,888,657</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>TOTAL</strong></td>
+      <td th:text="${totalRepayable}">6,183,360</td>
+      <td th:text="${productCategory == 'ISLAMIC'} ? ${profitAmount} : ${totalInterest}">1,183,360</td>
+      <td th:text="${facilityAmount}">5,000,000</td>
+      <td>0.00</td>
+    </tr>
+  </table>
+  <p style="font-size:7.5pt; color:#6B7280; margin-top:4px;">
+    Full schedule generated at disbursement and appended to this Agreement.
+  </p>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">3. SECURITY</div>
+  <ol class="roman">
+    <li th:each="sec : ${securityItems}" th:text="${sec}">Security item</li>
+  </ol>
+
+  <hr class="gray-rule"/>
+  <!-- Islamic: Takaful. Conventional: Comprehensive insurance -->
+  <div class="clause-num" th:text="${productCategory == 'ISLAMIC'} ? '4. TAKAFUL INSURANCE' : '4. INSURANCE'">4. INSURANCE</div>
+  <p class="body" th:if="${productCategory == 'ISLAMIC'}">
+    The Borrower shall maintain Takaful (Islamic) insurance over the Wakala Asset and charged land
+    with DIB Bank Kenya Limited named as first loss payee. The insurer must be from the Bank's
+    approved Takaful panel. Conventional insurance is not acceptable for this facility.
+    Original Takaful policy schedules must be delivered to the Bank's Legal Department before
+    drawdown and upon each annual renewal.
+  </p>
+  <p class="body" th:if="${productCategory == 'CONVENTIONAL'}">
+    The Borrower shall maintain comprehensive insurance over all charged assets with
+    DIB Bank Kenya Limited named as first loss payee (not merely noted). The insurer
+    must be from the Bank's general approved panel. Original policy schedules must be
+    delivered to Legal before drawdown and upon each annual renewal. Each policy must
+    contain a thirty (30) day prior cancellation notice clause.
+  </p>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">5. FINANCIAL COVENANTS</div>
+  <ol class="alpha">
+    <li th:each="cov : ${covenants}" th:text="${cov}">Covenant item</li>
+  </ol>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">6. EVENTS OF DEFAULT</div>
+  <ol class="roman">
+    <li>Failure to pay any instalment or other sum on its due date;</li>
+    <li>Breach of any term, condition or covenant of this Agreement or the Offer Letter;</li>
+    <li>Any misrepresentation in any material respect;</li>
+    <li>The Borrower becoming insolvent or winding-up proceedings commenced;</li>
+    <li th:if="${productCategory == 'ISLAMIC'}">The Wakala Asset being removed from the declared location without the Bank's consent;</li>
+    <li th:if="${productCategory == 'ISLAMIC'}">Lapse or cancellation of any Takaful insurance policy without immediate replacement;</li>
+    <li th:if="${productCategory == 'CONVENTIONAL'}">Lapse of comprehensive insurance without immediate replacement;</li>
+    <li>Material adverse change in the Borrower's financial position.</li>
+  </ol>
+
+  <hr class="gray-rule"/>
+  <div class="clause-num">7. GOVERNING LAW</div>
+  <p class="body" th:if="${productCategory == 'ISLAMIC'}">
+    This Agreement is governed by the laws of the Republic of Kenya and the principles of
+    Islamic Shariah as approved by the DIB Bank Kenya Limited Shariah Supervisory Board.
+    In any conflict between these terms and Shariah principles, Shariah principles shall prevail.
+  </p>
+  <p class="body" th:if="${productCategory == 'CONVENTIONAL'}">
+    This Agreement is governed by and construed in accordance with the laws of the Republic
+    of Kenya. Any dispute shall be subject to the exclusive jurisdiction of the Kenyan courts.
+  </p>
+
+  <hr class="navy-rule"/>
+  <p class="body">IN WITNESS WHEREOF the parties have executed this Agreement on the date stated above.</p>
+
+  <table class="sig-table">
+    <tr>
+      <td>
+        <div class="sig-line"></div>
+        <div class="sig-name">For: DIB Bank Kenya Limited</div>
+        <div class="sig-role" th:text="${approverName}">Fatuma Ochieng</div>
+        <div class="sig-role" th:text="${approverTitle}">Senior Credit Manager</div>
+        <div class="sig-date">Date: <span th:text="${agreementDate}">16 April 2026</span></div>
+      </td>
+      <td>
+        <div class="sig-line"></div>
+        <div class="sig-name" th:text="${customerName}">Patel Agro Industries Limited</div>
+        <div class="sig-role" th:text="${director1Name}">Ramesh Patel</div>
+        <div class="sig-role" th:text="'Director — ID No. ' + ${director1Id}">Director</div>
+        <div class="sig-date">Date: _____________________</div>
+      </td>
+    </tr>
+  </table>
+  <p style="margin-top:12px; color:#9CA3AF; font-size:9pt;">
+    Witness: ___________________________&#160;&#160; Signature: ___________________________&#160;&#160; Date: _______________
+  </p>
+
+  <div class="ssb-box" th:if="${productCategory == 'ISLAMIC'}">
+    <strong>Shariah Supervisory Board Attestation — Ref: <span th:text="${shariahApprovalRef}">SAB-DIB-2026-004</span></strong><br/>
+    Sheikh Abdul Rahman, Chairman, Shariah Supervisory Board, DIB Bank Kenya Limited —
+    <span th:text="${shariahApprovalDate}">14 April 2026</span>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="gold-top"></div>
+  <p th:text="'Facility Agreement — ' + ${customerName} + ' — ' + ${applicationRef}">Facility Agreement</p>
+  <p>DIB Bank Kenya Limited | Upper Hill, Nairobi | Tel: +254 20 364 4000 | info@dibbank.co.ke | www.dibbank.co.ke</p>
+  <p>Classification: Confidential. Deposits protected by KDIC.</p>
+</div>
+</body>
+</html>

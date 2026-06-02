@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Order Notification</title>
+    <style>
+        body {
+            background-color: #f4f6f8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #1f2937;
+            color: #ffffff;
+            padding: 20px;
+            font-size: 22px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .content {
+            padding: 25px;
+            color: #333;
+            font-size: 14px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background: #f1f5f9;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .download {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-left: 4px solid #2563eb;
+        }
+        .footer {
+            background: #f1f5f9;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        Purchase Order Notification
+    </div>
+
+    <div class="content">
+
+        <p>
+            Hello <strong th:text="${vendorName}">Vendor</strong>,
+        </p>
+
+        <p>
+            Please find below the purchase order details for your confirmation.
+        </p>
+
+        <!-- Order Info -->
+        <p>
+            <strong>Order ID:</strong>
+            <span th:text="${orderId}"></span>
+        </p>
+
+
+        <p>
+            <strong>Initiated By:</strong>
+            <span th:text="${initiator}"></span>
+        </p>
+
+        <!-- ================= SUPPLIER DETAILS ================= -->
+        <div class="section-title">Supplier Details</div>
+        <p>
+            <strong th:text="${supplierCompanyName}">Supplier Company</strong><br/>
+            <span th:text="${supplierCompanyStreet}"></span><br/>
+            <span th:text="${supplierCompanySuburb}"></span>,
+            <span th:text="${supplierCompanyCity}"></span><br/>
+            <span th:text="${supplierCompanyState}"></span> -
+            <span th:text="${supplierCompanyPostcode}"></span><br/>
+            <span th:text="${supplierCompanyCountry}"></span>
+        </p>
+
+        <!-- ================= VENDOR DETAILS ================= -->
+        <div class="section-title">Vendor Details</div>
+        <p>
+            <strong th:text="${vendorCompanyName}">Vendor Company</strong><br/>
+            Contact: <span th:text="${vendorName}"></span><br/>
+            <span th:text="${vendorCompanyStreet}"></span><br/>
+            <span th:text="${vendorCompanySuburb}"></span>,
+            <span th:text="${vendorCompanyCity}"></span><br/>
+            <span th:text="${vendorCompanyState}"></span> -
+            <span th:text="${vendorCompanyPostcode}"></span><br/>
+            <span th:text="${vendorCompanyCountry}"></span>
+        </p>
+
+        <!-- ================= ITEMS ================= -->
+        <div class="section-title">Order Items</div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.productCode}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.totalPrice}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- ================= GRAND TOTAL ================= -->
+        <div class="total">
+            Grand Total: $
+            <span th:text="${grandTotal}">0</span>
+        </div>
+
+        <!-- ================= PO PDF ================= -->
+        <div class="download">
+            📄 <strong>Purchase Order (PDF):</strong><br/>
+            <a th:href="${poPdfLink}" target="_blank">
+                Click here to download Purchase Order
+            </a>
+        </div>
+
+        <p>
+            Kindly review and confirm the order.
+        </p>
+
+    </div>
+
+    <div class="footer">
+        © 2025 LightMetrics | Automated Notification
+    </div>
+
+</div>
+</body>
+</html>
