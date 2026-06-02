@@ -517,4 +517,23 @@ public class DocumentController {
                 documentService.addMetadataByName(documentId, metadataName, value)
         );
     }
+
+    // ------------------------------------------------------------------------
+    // Add Digital signature to the document
+    // ------------------------------------------------------------------------
+    @Operation(summary = "Add digital signature to document")
+    @PostMapping("/{documentId}/sign/{fileId}")
+    public ResponseEntity<?> signDocument(
+            @PathVariable Long documentId,
+            @PathVariable Long fileId) {
+
+        documentService.digitallySignDocument(
+                documentId,
+                fileId
+        );
+
+        return ResponseEntity.ok(
+                "Document signed successfully"
+        );
+    }
 }

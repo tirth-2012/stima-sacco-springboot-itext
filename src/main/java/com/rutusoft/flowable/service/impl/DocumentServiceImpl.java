@@ -6,8 +6,10 @@ import com.rutusoft.flowable.entity.AppNotification;
 import com.rutusoft.flowable.repository.AppNotificationRepository;
 import com.rutusoft.flowable.repository.MayanDocumentRepository;
 import com.rutusoft.flowable.service.DocumentService;
+import com.rutusoft.flowable.service.PdfSignatureService;
 import com.rutusoft.flowable.service.ProcessInstanceVariablesService;
 import com.rutusoft.flowable.service.TokenService;
+import com.rutusoft.flowable.utility.ByteArrayMultipartFile;
 import com.rutusoft.flowable.utility.JsonUtils;
 import com.rutusoft.flowable.utility.MailNotificationUtil;
 import com.rutusoft.flowable.utility.SecurityUtil;
@@ -26,6 +28,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +58,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Autowired
     private AppNotificationRepository notificationRepository;
+
+    private final PdfSignatureService pdfSignatureService;
 
     // ------------------------------------------------------------------------
     // Common Headers
@@ -851,8 +856,8 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     // ------------------------------------------------------------------------
-// Get Document Versions (ALL versions of a document)
-// ------------------------------------------------------------------------
+    // Get Document Versions (ALL versions of a document)
+    // ------------------------------------------------------------------------
     @Override
     public List<DocumentDto> getDocumentVersions(Long documentId) {
 
@@ -1073,19 +1078,15 @@ public class DocumentServiceImpl implements DocumentService {
                         JsonUtils.getLocalDateTime(result, "timestamp");
 
                 // ✅ FIXED FILE ID
-                Long fileId = null;
+                Long fileId =
+                        JsonUtils.getLong(result, "id");
 
-                if (files != null && i < files.size()) {
-
-                    Map<String, Object> file = files.get(i);
-
-                    fileId = JsonUtils.getLong(file, "id");
-                }
-
-                // fallback
-                if (fileId == null) {
-                    fileId = versionId;
-                }
+                log.info(
+                        "Document={} Version={} File={}",
+                        documentId,
+                        versionId,
+                        fileId
+                );
 
                 DocumentDto documentDto = new DocumentDto();
 
@@ -1133,6 +1134,14 @@ public class DocumentServiceImpl implements DocumentService {
 
         log.debug("Finished getDocumentVersions. Total DTOs: {}",
                 documentVersionDtos.size());
+
+        log.info("==== DOCUMENT {} ====", documentId);
+
+        log.info("VERSIONS RESPONSE:");
+        results.forEach(v -> log.info("{}", v));
+
+        log.info("FILES RESPONSE:");
+        files.forEach(f -> log.info("{}", f));
 
         return documentVersionDtos;
     }
@@ -2056,5 +2065,69 @@ public class DocumentServiceImpl implements DocumentService {
 
         // Delegate to existing method
         return addMetadata(documentId, metadataTypeId, value);
+    }
+
+    // ------------------------------------------------------------------------
+    // Add Digital signature to the document
+    // ------------------------------------------------------------------------
+    @Override
+    @Transactional
+    public void digitallySignDocument(
+            Long documentId,
+            Long fileId) {
+
+        ResponseEntity<byte[]> response =
+                downloadDocumentFile(
+                        documentId,
+                        fileId
+                );
+
+        byte[] originalPdf =
+                response.getBody();
+
+        if (originalPdf == null ||
+                originalPdf.length == 0) {
+
+            throw new RuntimeException(
+                    "Downloaded PDF is empty"
+            );
+        }
+
+        byte[] signedPdf =
+                pdfSignatureService.signPdf(
+                        originalPdf
+                );
+
+        log.info(
+                "Original PDF size={}",
+                originalPdf.length
+        );
+
+        log.info(
+                "Signed PDF size={}",
+                signedPdf.length
+        );
+
+        MultipartFile multipartFile =
+                new ByteArrayMultipartFile(
+                        signedPdf,
+                        "file",
+                        "signed-" + System.currentTimeMillis() + ".pdf",
+                        "application/pdf"
+                );
+
+        uploadNewVersionDocumentFile(
+                documentId,
+                multipartFile,
+                "Digitally Signed",
+                "replace"
+        );
+
+        fileCache.remove(documentId);
+
+        log.info(
+                "Document {} signed successfully",
+                documentId
+        );
     }
 }

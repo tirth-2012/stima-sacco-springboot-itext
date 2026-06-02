@@ -158,10 +158,16 @@ springdoc:
 #    #url: /flowable-service/v3/api-docs
 
 
+#signature:
+#  certificate-path: certificates/company-signing.p12
+#  certificate-password: Rutusoft@123
+#  certificate-alias: company-signing
+
 signature:
-  certificate-path: certificates/company-signing.p12
-  certificate-password: Rutusoft@123
-  certificate-alias: company-signing
+  p12-path: certificates/company-signing.p12
+  p12-password: Rutusoft@123
+  reason: Company Approval
+  location: Kenya
 
 # =========================
 # LOGGING

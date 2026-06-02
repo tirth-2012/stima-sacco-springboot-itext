@@ -96,4 +96,5 @@ public interface DocumentService {
     void updateMultipleMetadata(Long documentId,
                                 Map<String, String> metadataMap);
 
+    void digitallySignDocument(Long documentId, Long fileId);
 }
